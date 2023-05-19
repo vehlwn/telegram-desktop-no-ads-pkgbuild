@@ -1,7 +1,7 @@
 # https://github.com/archlinux/svntogit-community/blob/packages/telegram-desktop/trunk/PKGBUILD
 pkgname=telegram-desktop-no-ads
-pkgver=4.4.1
-pkgrel=2
+pkgver=4.8.1
+pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
 url="https://desktop.telegram.org/"
@@ -20,7 +20,7 @@ source=(
     "0001-Disable-sponsored-messages.patch"
 )
 sha256sums=(
-    "76981e32541c42b3212427e9abb4db2a6f55a14eaba31b3d7ad7d3d5ed8008b1"
+    "SKIP"
     "5f47426d882b6544d2cbb536a9fcc3ed13b6b7d035b713ccd8375d12536d71fe"
 )
 
