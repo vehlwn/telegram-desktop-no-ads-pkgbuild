@@ -28,7 +28,7 @@ sha256sums=(
 
 prepare() {
     cd tdesktop-$pkgver-full
-    patch --forward --strip=1 -i "${srcdir}/no-ads.patch"
+    patch --forward --strip=1 -i "${srcdir}/remove-ads.patch"
 }
 
 build() {
