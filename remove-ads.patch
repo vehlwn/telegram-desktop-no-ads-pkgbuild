@@ -1,0 +1,389 @@
+From 70c099e10f8d0e136598a9c51fb74259a4a0fb20 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 22 Jun 2022 16:57:44 +0400
+Subject: [PATCH 01/10] Disable sponsored messages
+
+---
+ Telegram/SourceFiles/data/data_sponsored_messages.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Telegram/SourceFiles/data/data_sponsored_messages.cpp b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
+index 9f4f992ed..66495ac36 100644
+--- a/Telegram/SourceFiles/data/data_sponsored_messages.cpp
++++ b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
+@@ -175,7 +175,7 @@ void SponsoredMessages::inject(
+ }
+ 
+ bool SponsoredMessages::canHaveFor(not_null<History*> history) const {
+-	return history->peer->isChannel();
++	return false;
+ }
+ 
+ void SponsoredMessages::request(not_null<History*> history, Fn<void()> done) {
+-- 
+2.40.1
+
+
+From a8188170c4a6d0ea6970b6176159e65c6069314b Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Fri, 19 May 2023 17:51:54 +0400
+Subject: [PATCH 02/10] Cannot react
+
+---
+ Telegram/SourceFiles/history/history_item.cpp | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
+index c72d2454f..aa68c988d 100644
+--- a/Telegram/SourceFiles/history/history_item.cpp
++++ b/Telegram/SourceFiles/history/history_item.cpp
+@@ -2128,14 +2128,7 @@ void HistoryItem::translationDone(LanguageId to, TextWithEntities result) {
+ }
+ 
+ bool HistoryItem::canReact() const {
+-	if (!isRegular() || isService()) {
+-		return false;
+-	} else if (const auto media = this->media()) {
+-		if (media->call()) {
+-			return false;
+-		}
+-	}
+-	return true;
++    return false;
+ }
+ 
+ void HistoryItem::toggleReaction(
+-- 
+2.40.1
+
+
+From 2e6acdd19ef6d97cc22a6593aa2862f5c835a422 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Fri, 19 May 2023 17:52:19 +0400
+Subject: [PATCH 03/10] Always empty reaction list
+
+---
+ Telegram/SourceFiles/history/history_item.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
+index aa68c988d..0fc5296ba 100644
+--- a/Telegram/SourceFiles/history/history_item.cpp
++++ b/Telegram/SourceFiles/history/history_item.cpp
+@@ -2161,7 +2161,7 @@ void HistoryItem::updateReactionsUnknown() {
+ 
+ const std::vector<Data::MessageReaction> &HistoryItem::reactions() const {
+ 	static const auto kEmpty = std::vector<Data::MessageReaction>();
+-	return _reactions ? _reactions->list() : kEmpty;
++	return kEmpty;
+ }
+ 
+ auto HistoryItem::recentReactions() const
+-- 
+2.40.1
+
+
+From 640edc5524fa84908278a31fbf79ab48e2b7adf8 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Mon, 22 May 2023 16:29:10 +0400
+Subject: [PATCH 04/10] Disable webpage preview on my messages
+
+---
+ Telegram/SourceFiles/apiwrap.cpp                            | 4 ++--
+ Telegram/SourceFiles/history/history_widget.cpp             | 6 ++----
+ .../history/view/controls/history_view_compose_controls.cpp | 5 ++---
+ 3 files changed, 6 insertions(+), 9 deletions(-)
+
+diff --git a/Telegram/SourceFiles/apiwrap.cpp b/Telegram/SourceFiles/apiwrap.cpp
+index a589be492..b067070fd 100644
+--- a/Telegram/SourceFiles/apiwrap.cpp
++++ b/Telegram/SourceFiles/apiwrap.cpp
+@@ -2116,7 +2116,7 @@ void ApiWrap::saveDraftsToCloud() {
+ 
+ 		auto flags = MTPmessages_SaveDraft::Flags(0);
+ 		auto &textWithTags = cloudDraft->textWithTags;
+-		if (cloudDraft->previewState != Data::PreviewState::Allowed) {
++		if (true) {
+ 			flags |= MTPmessages_SaveDraft::Flag::f_no_webpage;
+ 		}
+ 		if (cloudDraft->msgId) {
+@@ -3585,7 +3585,7 @@ void ApiWrap::sendMessage(MessageToSend &&message) {
+ 		}
+ 		const auto replyHeader = NewMessageReplyHeader(action);
+ 		MTPMessageMedia media = MTP_messageMediaEmpty();
+-		if (message.webPageId == CancelledWebPageId) {
++		if (true) {
+ 			sendFlags |= MTPmessages_SendMessage::Flag::f_no_webpage;
+ 		} else if (message.webPageId) {
+ 			auto page = _session->data().webpage(message.webPageId);
+diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
+index cd07b0767..adad8d399 100644
+--- a/Telegram/SourceFiles/history/history_widget.cpp
++++ b/Telegram/SourceFiles/history/history_widget.cpp
+@@ -3789,7 +3789,7 @@ void HistoryWidget::saveEditMsg() {
+ 	};
+ 
+ 	auto options = Api::SendOptions();
+-	options.removeWebPageId = (webPageId == CancelledWebPageId);
++	options.removeWebPageId = true;
+ 	_saveEditMsgRequestId = Api::EditTextMessage(
+ 		item,
+ 		sending,
+@@ -7292,9 +7292,7 @@ void HistoryWidget::previewCancel() {
+ }
+ 
+ void HistoryWidget::checkPreview() {
+-	const auto previewRestricted = [&] {
+-		return _peer && _peer->amRestricted(ChatRestriction::EmbedLinks);
+-	}();
++	const auto previewRestricted = true;
+ 	if (_previewState != Data::PreviewState::Allowed || previewRestricted) {
+ 		previewCancel();
+ 		return;
+diff --git a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
+index 1da520824..7d878b724 100644
+--- a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
++++ b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
+@@ -294,8 +294,7 @@ void WebpageProcessor::getWebPagePreview() {
+ }
+ 
+ void WebpageProcessor::checkPreview() {
+-	const auto previewRestricted = _history->peer
+-		&& _history->peer->amRestricted(ChatRestriction::EmbedLinks);
++	const auto previewRestricted = true;
+ 	if (_previewState != Data::PreviewState::Allowed
+ 		|| previewRestricted) {
+ 		cancel();
+@@ -908,7 +907,7 @@ MessageToEdit FieldHeader::queryToEdit() {
+ 		.fullId = item->fullId(),
+ 		.options = {
+ 			.scheduled = item->isScheduled() ? item->date() : 0,
+-			.removeWebPageId = !hasPreview(),
++			.removeWebPageId = true,
+ 		},
+ 	};
+ }
+-- 
+2.40.1
+
+
+From 1196d494113758b9062eca918162c6f501cee21d Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Tue, 23 May 2023 17:08:09 +0400
+Subject: [PATCH 05/10] Disable webpage previews on other users messages
+
+---
+ Telegram/SourceFiles/history/history_item.cpp | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
+index 0fc5296ba..4e7e3ebe7 100644
+--- a/Telegram/SourceFiles/history/history_item.cpp
++++ b/Telegram/SourceFiles/history/history_item.cpp
+@@ -233,22 +233,8 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
+ 		}, [](const MTPDdocumentEmpty &) -> Result {
+ 			return nullptr;
+ 		});
+-	}, [&](const MTPDmessageMediaWebPage &media) {
+-		return media.vwebpage().match([](const MTPDwebPageEmpty &) -> Result {
+-			return nullptr;
+-		}, [&](const MTPDwebPagePending &webpage) -> Result {
+-			return std::make_unique<Data::MediaWebPage>(
+-				item,
+-				item->history()->owner().processWebpage(webpage));
+-		}, [&](const MTPDwebPage &webpage) -> Result {
+-			return std::make_unique<Data::MediaWebPage>(
+-				item,
+-				item->history()->owner().processWebpage(webpage));
+-		}, [](const MTPDwebPageNotModified &) -> Result {
+-			LOG(("API Error: "
+-				"webPageNotModified is unexpected in message media."));
+-			return nullptr;
+-		});
++	}, [&](const MTPDmessageMediaWebPage &media) -> Result {
++		return nullptr;
+ 	}, [&](const MTPDmessageMediaGame &media) -> Result {
+ 		return media.vgame().match([&](const MTPDgame &game) {
+ 			return std::make_unique<Data::MediaGame>(
+-- 
+2.40.1
+
+
+From baf2a92fff1133f56b41ab50cdf35ab2d317bf57 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Mon, 22 May 2023 17:11:53 +0400
+Subject: [PATCH 06/10] Disable context menu item N Reacted
+
+---
+ .../SourceFiles/history/view/history_view_context_menu.cpp     | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
+index cc3d8586b..0e4aaa80b 100644
+--- a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
++++ b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
+@@ -987,8 +987,7 @@ base::unique_qptr<Ui::PopupMenu> FillContextMenu(
+ 		: nullptr;
+ 	const auto hasSelection = !request.selectedItems.empty()
+ 		|| !request.selectedText.empty();
+-	const auto hasWhoReactedItem = item
+-		&& Api::WhoReactedExists(item, Api::WhoReactedList::All);
++	const auto hasWhoReactedItem = false;
+ 
+ 	auto result = base::make_unique_q<Ui::PopupMenu>(
+ 		list,
+-- 
+2.40.1
+
+
+From 4895ea45afdc514aa785dcebc204075b0f5f0b4a Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 24 May 2023 10:25:35 +0400
+Subject: [PATCH 07/10] Cannot pin messages; disabled PinnedBar
+
+---
+ Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
+ Telegram/SourceFiles/history/history_widget.cpp | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Telegram/SourceFiles/data/data_peer.cpp b/Telegram/SourceFiles/data/data_peer.cpp
+index 42c548438..c6751fe45 100644
+--- a/Telegram/SourceFiles/data/data_peer.cpp
++++ b/Telegram/SourceFiles/data/data_peer.cpp
+@@ -950,7 +950,7 @@ Data::RestrictionCheckResult PeerData::amRestricted(
+ 				: Result::Allowed())
+ 			: (right == ChatRestriction::PinMessages)
+ 			? ((user->flags() & UserDataFlag::CanPinMessages)
+-				? Result::Allowed()
++				? Result::Explicit()
+ 				: Result::Explicit())
+ 			: Result::Allowed();
+ 	} else if (const auto channel = asChannel()) {
+diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
+index adad8d399..e23f54093 100644
+--- a/Telegram/SourceFiles/history/history_widget.cpp
++++ b/Telegram/SourceFiles/history/history_widget.cpp
+@@ -6483,7 +6483,7 @@ void HistoryWidget::checkPinnedBarState() {
+ 		}
+ 		return;
+ 	}
+-	if (_pinnedBar || !universalPinnedId) {
++	if (true) {
+ 		return;
+ 	}
+ 
+-- 
+2.40.1
+
+
+From ac8fcb8e0c0171d45e361db151b1db2d4c3c7e74 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 24 May 2023 10:55:01 +0400
+Subject: [PATCH 08/10] Disable record button
+
+---
+ Telegram/SourceFiles/history/history_widget.cpp            | 7 +------
+ .../view/controls/history_view_compose_controls.cpp        | 7 +------
+ 2 files changed, 2 insertions(+), 12 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
+index e23f54093..053344c80 100644
+--- a/Telegram/SourceFiles/history/history_widget.cpp
++++ b/Telegram/SourceFiles/history/history_widget.cpp
+@@ -4545,12 +4545,7 @@ bool HistoryWidget::isSearching() const {
+ }
+ 
+ bool HistoryWidget::showRecordButton() const {
+-	return Media::Capture::instance()->available()
+-		&& !_voiceRecordBar->isListenState()
+-		&& !_voiceRecordBar->isRecordingByAnotherBar()
+-		&& !HasSendText(_field)
+-		&& !readyToForward()
+-		&& !_editMsgId;
++	return false;
+ }
+ 
+ bool HistoryWidget::showInlineBotCancel() const {
+diff --git a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
+index 7d878b724..1718e5cdd 100644
+--- a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
++++ b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
+@@ -1477,12 +1477,7 @@ void ComposeControls::orderControls() {
+ }
+ 
+ bool ComposeControls::showRecordButton() const {
+-	return ::Media::Capture::instance()->available()
+-		&& !_voiceRecordBar->isListenState()
+-		&& !_voiceRecordBar->isRecordingByAnotherBar()
+-		&& !HasSendText(_field)
+-		&& !readyToForward()
+-		&& !isEditingMessage();
++	return false;
+ }
+ 
+ void ComposeControls::clearListenState() {
+-- 
+2.40.1
+
+
+From 5096d1841b90bf357228275f16db48de81553ad5 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 24 May 2023 16:45:47 +0400
+Subject: [PATCH 09/10] Disable calls
+
+---
+ .../history/view/history_view_top_bar_widget.cpp         | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp b/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
+index 808c26e5d..e57b933b8 100644
+--- a/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
++++ b/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
+@@ -1090,14 +1090,7 @@ void TopBarWidget::updateControlsVisibility() {
+ 		&& !isOneColumn
+ 		&& _controller->canShowThirdSection()
+ 		&& !_chooseForReportReason);
+-	const auto callsEnabled = [&] {
+-		if (const auto peer = _activeChat.key.peer()) {
+-			if (const auto user = peer->asUser()) {
+-				return !user->isSelf() && !user->isBot();
+-			}
+-		}
+-		return false;
+-	}();
++	const auto callsEnabled = false;
+ 	_call->setVisible(historyMode
+ 		&& callsEnabled
+ 		&& !_chooseForReportReason);
+-- 
+2.40.1
+
+
+From a649f5c836436a3f790df671bdf04548b2e68996 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Thu, 25 May 2023 14:38:14 +0400
+Subject: [PATCH 10/10] Disable MUTE/UNMUTE button
+
+---
+ Telegram/SourceFiles/history/history_widget.cpp | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
+index 053344c80..e95a353e5 100644
+--- a/Telegram/SourceFiles/history/history_widget.cpp
++++ b/Telegram/SourceFiles/history/history_widget.cpp
+@@ -4534,10 +4534,7 @@ bool HistoryWidget::isChoosingTheme() const {
+ }
+ 
+ bool HistoryWidget::isMuteUnmute() const {
+-	return _peer
+-		&& ((_peer->isBroadcast() && !_peer->asChannel()->canPublish())
+-			|| (_peer->isGigagroup() && !Data::CanSendAnything(_peer))
+-			|| _peer->isRepliesChat());
++	return false;
+ }
+ 
+ bool HistoryWidget::isSearching() const {
+-- 
+2.40.1
+

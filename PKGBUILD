@@ -1,7 +1,7 @@
 # https://github.com/archlinux/svntogit-community/blob/packages/telegram-desktop/trunk/PKGBUILD
 pkgname=telegram-desktop-no-ads
 pkgver=4.8.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
 url="https://desktop.telegram.org/"
@@ -15,18 +15,20 @@ makedepends=('cmake' 'git' 'ninja' 'python' 'range-v3' 'tl-expected' 'microsoft-
 optdepends=('webkit2gtk: embedded browser features'
             'xdg-desktop-portal: desktop integration')
 conflicts=("telegram-desktop")
+# Patches are from feature/remove-ads branch:
+# https://github.com/vehlwn/tdesktop/tree/feature/remove-ads
 source=(
     "https://github.com/telegramdesktop/tdesktop/releases/download/v${pkgver}/tdesktop-${pkgver}-full.tar.gz"
-    "0001-Disable-sponsored-messages.patch"
+    "remove-ads.patch"
 )
 sha256sums=(
     "SKIP"
-    "5f47426d882b6544d2cbb536a9fcc3ed13b6b7d035b713ccd8375d12536d71fe"
+    "8959d71245788a8db85bd1691db587db24a1093bb65cc4314c4ef141713366f2"
 )
 
 prepare() {
     cd tdesktop-$pkgver-full
-    patch --forward --strip=1 -i "${srcdir}/0001-Disable-sponsored-messages.patch"
+    patch --forward --strip=1 -i "${srcdir}/no-ads.patch"
 }
 
 build() {
