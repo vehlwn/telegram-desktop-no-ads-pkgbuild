@@ -1,33 +1,7 @@
-From 70c099e10f8d0e136598a9c51fb74259a4a0fb20 Mon Sep 17 00:00:00 2001
-From: vehlwn <36479428+vehlwn@users.noreply.github.com>
-Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 01/10] Disable sponsored messages
-
----
- Telegram/SourceFiles/data/data_sponsored_messages.cpp | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Telegram/SourceFiles/data/data_sponsored_messages.cpp b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
-index 9f4f992ed..66495ac36 100644
---- a/Telegram/SourceFiles/data/data_sponsored_messages.cpp
-+++ b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
-@@ -175,7 +175,7 @@ void SponsoredMessages::inject(
- }
- 
- bool SponsoredMessages::canHaveFor(not_null<History*> history) const {
--	return history->peer->isChannel();
-+	return false;
- }
- 
- void SponsoredMessages::request(not_null<History*> history, Fn<void()> done) {
--- 
-2.40.1
-
-
-From a8188170c4a6d0ea6970b6176159e65c6069314b Mon Sep 17 00:00:00 2001
+From 24829f50a5007ba4f4efb1d41bedbdbb0c65ec9d Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 02/10] Cannot react
+Subject: [PATCH 01/10] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 9 +--------
@@ -57,10 +31,10 @@ index c72d2454f..aa68c988d 100644
 2.40.1
 
 
-From 2e6acdd19ef6d97cc22a6593aa2862f5c835a422 Mon Sep 17 00:00:00 2001
+From 8fae29cf719a33b0208d50762be1bb2c3e8efb43 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:52:19 +0400
-Subject: [PATCH 03/10] Always empty reaction list
+Subject: [PATCH 02/10] Always empty reaction list
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 2 +-
@@ -83,10 +57,10 @@ index aa68c988d..0fc5296ba 100644
 2.40.1
 
 
-From 640edc5524fa84908278a31fbf79ab48e2b7adf8 Mon Sep 17 00:00:00 2001
+From b6ad16070d50cfcb16f523e2a581275dfd9fa927 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 04/10] Disable webpage preview on my messages
+Subject: [PATCH 03/10] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                            | 4 ++--
@@ -167,10 +141,10 @@ index 1da520824..7d878b724 100644
 2.40.1
 
 
-From 1196d494113758b9062eca918162c6f501cee21d Mon Sep 17 00:00:00 2001
+From 979ec46e77b0450b1f5ff423aa77433b53476a28 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 05/10] Disable webpage previews on other users messages
+Subject: [PATCH 04/10] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 18 ++----------------
@@ -209,10 +183,10 @@ index 0fc5296ba..4e7e3ebe7 100644
 2.40.1
 
 
-From baf2a92fff1133f56b41ab50cdf35ab2d317bf57 Mon Sep 17 00:00:00 2001
+From 23c9ffd9e37cb6ce7ab74b456bd952d96feeaa9c Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 06/10] Disable context menu item N Reacted
+Subject: [PATCH 05/10] Disable context menu item N Reacted
 
 ---
  .../SourceFiles/history/view/history_view_context_menu.cpp     | 3 +--
@@ -236,10 +210,10 @@ index cc3d8586b..0e4aaa80b 100644
 2.40.1
 
 
-From 4895ea45afdc514aa785dcebc204075b0f5f0b4a Mon Sep 17 00:00:00 2001
+From 7b3b250e0d1e861bd7883149dd3a3b8ed8403215 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 07/10] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 06/10] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -276,10 +250,10 @@ index adad8d399..e23f54093 100644
 2.40.1
 
 
-From ac8fcb8e0c0171d45e361db151b1db2d4c3c7e74 Mon Sep 17 00:00:00 2001
+From 220b3632841669bae177e6a1836814535aff4c21 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 08/10] Disable record button
+Subject: [PATCH 07/10] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp            | 7 +------
@@ -326,10 +300,10 @@ index 7d878b724..1718e5cdd 100644
 2.40.1
 
 
-From 5096d1841b90bf357228275f16db48de81553ad5 Mon Sep 17 00:00:00 2001
+From 3b7c32b04af89d0e9467a01c15e1f61532efa9b5 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 09/10] Disable calls
+Subject: [PATCH 08/10] Disable calls
 
 ---
  .../history/view/history_view_top_bar_widget.cpp         | 9 +--------
@@ -359,10 +333,10 @@ index 808c26e5d..e57b933b8 100644
 2.40.1
 
 
-From a649f5c836436a3f790df671bdf04548b2e68996 Mon Sep 17 00:00:00 2001
+From a06eeeab4e354f53568afdd3dcd43419be8b5393 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 10/10] Disable MUTE/UNMUTE button
+Subject: [PATCH 09/10] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 5 +----
@@ -384,6 +358,38 @@ index 053344c80..e95a353e5 100644
  }
  
  bool HistoryWidget::isSearching() const {
+-- 
+2.40.1
+
+
+From 1aa8a769c466bc2b4b60cbc7b5c1fcf843db3c40 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Sun, 28 May 2023 17:23:40 +0400
+Subject: [PATCH 10/10] Drop custom emoji
+
+---
+ Telegram/SourceFiles/history/history_item.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
+index 4e7e3ebe7..f6d8b3a33 100644
+--- a/Telegram/SourceFiles/history/history_item.cpp
++++ b/Telegram/SourceFiles/history/history_item.cpp
+@@ -294,12 +294,12 @@ HistoryItem::HistoryItem(
+ 		if (const auto media = data.vmedia()) {
+ 			setMedia(*media);
+ 		}
+-		auto textWithEntities = TextWithEntities{
++		auto textWithEntities = DropCustomEmoji(TextWithEntities{
+ 			qs(data.vmessage()),
+ 			Api::EntitiesFromMTP(
+ 				&history->session(),
+ 				data.ventities().value_or_empty())
+-		};
++		});
+ 		setText(_media ? textWithEntities : EnsureNonEmpty(textWithEntities));
+ 		if (const auto groupedId = data.vgrouped_id()) {
+ 			setGroupId(
 -- 
 2.40.1
 
