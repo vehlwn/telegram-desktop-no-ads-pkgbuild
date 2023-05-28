@@ -1,4 +1,4 @@
-# https://github.com/archlinux/svntogit-community/blob/packages/telegram-desktop/trunk/PKGBUILD
+# https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
 pkgver=4.8.1
 pkgrel=3
