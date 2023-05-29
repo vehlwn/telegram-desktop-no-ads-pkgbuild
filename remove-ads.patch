@@ -1,7 +1,1155 @@
+From 72cbfa04430bd035e0d64a7831494b446802232a Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 22 Jun 2022 16:57:44 +0400
+Subject: [PATCH 01/13] Update gitignore
+
+---
+ .gitignore | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/.gitignore b/.gitignore
+index 678ef32e3..af309cb7d 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -50,3 +50,6 @@ stage
+ *.*~
+ .idea/
+ cmake-build-debug/
++.cache/
++build/
++compile_commands.json
+-- 
+2.40.1
+
+
+From 7a29844250a8a7eb36c3126b6b9977a95a08fe0e Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Fri, 26 May 2023 07:37:16 +0400
+Subject: [PATCH 02/13] Remove github actions
+
+---
+ .github/CONTRIBUTING.md                      | 118 -------------
+ .github/ISSUE_TEMPLATE/BUG_REPORT.yml        |  78 ---------
+ .github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml   |  29 ----
+ .github/ISSUE_TEMPLATE/config.yml            |  11 --
+ .github/workflows/copyright_year_updater.yml |  16 --
+ .github/workflows/docker.yml                 |  40 -----
+ .github/workflows/issue_closer.yml           |  14 --
+ .github/workflows/linux.yml                  | 131 ---------------
+ .github/workflows/lock.yml                   |  15 --
+ .github/workflows/mac.yml                    | 138 ----------------
+ .github/workflows/master_updater.yml         |  35 ----
+ .github/workflows/no-response.yml            |  19 ---
+ .github/workflows/snap.yml                   |  80 ---------
+ .github/workflows/stale.yml                  |  25 ---
+ .github/workflows/user_agent_updater.yml     |  18 --
+ .github/workflows/win.yml                    | 165 -------------------
+ .github/workflows/winget.yml                 |  18 --
+ 17 files changed, 950 deletions(-)
+ delete mode 100644 .github/CONTRIBUTING.md
+ delete mode 100644 .github/ISSUE_TEMPLATE/BUG_REPORT.yml
+ delete mode 100644 .github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml
+ delete mode 100644 .github/ISSUE_TEMPLATE/config.yml
+ delete mode 100644 .github/workflows/copyright_year_updater.yml
+ delete mode 100644 .github/workflows/docker.yml
+ delete mode 100644 .github/workflows/issue_closer.yml
+ delete mode 100644 .github/workflows/linux.yml
+ delete mode 100644 .github/workflows/lock.yml
+ delete mode 100644 .github/workflows/mac.yml
+ delete mode 100644 .github/workflows/master_updater.yml
+ delete mode 100644 .github/workflows/no-response.yml
+ delete mode 100644 .github/workflows/snap.yml
+ delete mode 100644 .github/workflows/stale.yml
+ delete mode 100644 .github/workflows/user_agent_updater.yml
+ delete mode 100644 .github/workflows/win.yml
+ delete mode 100644 .github/workflows/winget.yml
+
+diff --git a/.github/CONTRIBUTING.md b/.github/CONTRIBUTING.md
+deleted file mode 100644
+index 4265e974d..000000000
+--- a/.github/CONTRIBUTING.md
++++ /dev/null
+@@ -1,118 +0,0 @@
+-# Contributing
+-
+-This document describes how you can contribute to Telegram Desktop. Please read it carefully.
+-
+-**Table of Contents**
+-
+-* [What contributions are accepted](#what-contributions-are-accepted)
+-* [Build instructions](#build-instructions)
+-* [Pull upstream changes into your fork regularly](#pull-upstream-changes-into-your-fork-regularly)
+-* [How to get your pull request accepted](#how-to-get-your-pull-request-accepted)
+-  * [Keep your pull requests limited to a single issue](#keep-your-pull-requests-limited-to-a-single-issue)
+-    * [Squash your commits to a single commit](#squash-your-commits-to-a-single-commit)
+-  * [Don't mix code changes with whitespace cleanup](#dont-mix-code-changes-with-whitespace-cleanup)
+-  * [Keep your code simple!](#keep-your-code-simple)
+-  * [Test your changes!](#test-your-changes)
+-  * [Write a good commit message](#write-a-good-commit-message)
+-
+-## What contributions are accepted
+-
+-We highly appreciate your contributions in the matter of fixing bugs and optimizing the Telegram Desktop source code and its documentation. In case of fixing the existing user experience please push to your fork and [submit a pull request][pr].
+-
+-Wait for us. We try to review your pull requests as fast as possible.
+-If we find issues with your pull request, we may suggest some changes and improvements.
+-
+-Unfortunately we **do not merge** any pull requests that have new feature implementations, translations to new languages and those which introduce any new user interface elements.
+-
+-If you have a translations-related contribution, check out [Translations platform][translate].
+-
+-Telegram Desktop is not a standalone application but a part of [Telegram project][telegram], so all the decisions about the features, languages, user experience, user interface and the design are made inside Telegram team, often according to some roadmap which is not public.
+-
+-## Build instructions
+-
+-See the [README.md][build_instructions] for details on the various build
+-environments.
+-
+-## Pull upstream changes into your fork regularly
+-
+-Telegram Desktop is advancing quickly. It is therefore critical that you pull upstream changes into your fork on a regular basis. Nothing is worse than putting in a days of hard work into a pull request only to have it rejected because it has diverged too far from upstream.
+-
+-To pull in upstream changes:
+-
+-    git remote add upstream https://github.com/telegramdesktop/tdesktop.git
+-    git fetch upstream master
+-
+-Check the log to be sure that you actually want the changes, before merging:
+-
+-    git log upstream/master
+-
+-Then rebase your changes on the latest commits in the `master` branch:
+-
+-    git rebase upstream/master
+-
+-After that, you have to force push your commits:
+-
+-    git push --force
+-
+-For more info, see [GitHub Help][help_fork_repo].
+-
+-## How to get your pull request accepted
+-
+-We want to improve Telegram Desktop with your contributions. But we also want to provide a stable experience for our users and the community. Follow these rules and you should succeed without a problem!
+-
+-### Keep your pull requests limited to a single issue
+-
+-Pull requests should be as small/atomic as possible. Large, wide-sweeping changes in a pull request will be **rejected**, with comments to isolate the specific code in your pull request. Some examples:
+-
+-* If you are making spelling corrections in the docs, don't modify other files.
+-* If you are adding new functions don't '*cleanup*' unrelated functions. That cleanup belongs in another pull request.
+-
+-#### Squash your commits to a single commit
+-
+-To keep the history of the project clean, you should make one commit per pull request.
+-If you already have multiple commits, you can add the commits together (squash them) with the following commands in Git Bash:
+-
+-1. Open `Git Bash` (or `Git Shell`)
+-2. Enter following command to squash the recent {N} commits: `git reset --soft HEAD~{N} && git commit` (replace `{N}` with the number of commits you want to squash)
+-3. Press <kbd>i</kbd> to get into Insert-mode
+-4. Enter the commit message of the new commit
+-5. After adding the message, press <kbd>ESC</kbd> to get out of the Insert-mode
+-6. Write `:wq` and press <kbd>Enter</kbd> to save the new message or write `:q!` to discard your changes
+-7. Enter `git push --force` to push the new commit to the remote repository
+-
+-For example, if you want to squash the last 5 commits, use `git reset --soft HEAD~5 && git commit`
+-
+-### Don't mix code changes with whitespace cleanup
+-
+-If you change two lines of code and correct 200 lines of whitespace issues in a file the diff on that pull request is functionally unreadable and will be **rejected**. Whitespace cleanups need to be in their own pull request.
+-
+-### Keep your code simple!
+-
+-Please keep your code as clean and straightforward as possible.
+-Furthermore, the pixel shortage is over. We want to see:
+-
+-* `opacity` instead of `o`
+-* `placeholder` instead of `ph`
+-* `myFunctionThatDoesThings()` instead of `mftdt()`
+-
+-### Test your changes!
+-
+-Before you submit a pull request, please test your changes. Verify that Telegram Desktop still works and your changes don't cause other issue or crashes.
+-
+-### Write a good commit message
+-
+-* Explain why you make the changes. [More infos about a good commit message.][commit_message]
+-
+-* If you fix an issue with your commit, please close the issue by [adding one of the keywords and the issue number][closing-issues-via-commit-messages] to your commit message.
+-
+-  For example: `Fix #545`
+-
+-[//]: # (LINKS)
+-[telegram]: https://telegram.org/
+-[help_fork_repo]: https://help.github.com/articles/fork-a-repo/
+-[help_change_commit_message]: https://help.github.com/articles/changing-a-commit-message/
+-[commit_message]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+-[pr]: https://github.com/telegramdesktop/tdesktop/compare
+-[build_instructions]: https://github.com/telegramdesktop/tdesktop/blob/master/README.md#build-instructions
+-[closing-issues-via-commit-messages]: https://help.github.com/articles/closing-issues-via-commit-messages/
+-[translate]: https://translations.telegram.org
+diff --git a/.github/ISSUE_TEMPLATE/BUG_REPORT.yml b/.github/ISSUE_TEMPLATE/BUG_REPORT.yml
+deleted file mode 100644
+index e3c2215d8..000000000
+--- a/.github/ISSUE_TEMPLATE/BUG_REPORT.yml
++++ /dev/null
+@@ -1,78 +0,0 @@
+-name: Bug report
+-description: Report errors or unexpected behavior.
+-labels: [bug]
+-body:
+-  - type: markdown
+-    attributes:
+-      value: |
+-        Thanks for reporting issues of Telegram Desktop!
+-
+-        To make it easier for us to help you please enter detailed information below.
+-  - type: textarea
+-    attributes:
+-      label: Steps to reproduce
+-      placeholder: |
+-        1. 
+-        2. 
+-        3. 
+-    validations:
+-      required: true
+-  - type: textarea
+-    attributes:
+-      label: Expected behaviour
+-      placeholder: Tell us what should happen
+-    validations:
+-      required: true
+-  - type: textarea
+-    attributes:
+-      label: Actual behaviour
+-      placeholder: Tell us what happens instead
+-    validations:
+-      required: true
+-  - type: input
+-    attributes:
+-      label: Operating system
+-      description: >
+-        Your operating system name, version and desktop environment.
+-        **Don't use kernel version (uname), it's useless.**
+-    validations:
+-      required: true
+-  - type: input
+-    attributes:
+-      label: Version of Telegram Desktop
+-      description: >
+-        Please note we don't support versions from Linux distro repositories.
+-        If you need support for these versions, **please contact your distro maintainer**
+-        or your distro bugtracker.
+-        **Don't use 'latest'**, specify actual version, **that's a reason to close your issue**.
+-    validations:
+-      required: true
+-  - type: dropdown
+-    attributes:
+-      label: Installation source
+-      multiple: false
+-      options:
+-        - Static binary from official website
+-        - Microsoft Store
+-        - Mac App Store
+-        - Flatpak
+-        - Snap
+-        - Other (unofficial) source
+-    validations:
+-      required: true
+-  - type: input
+-    attributes:
+-      label: Crash ID
+-      description: >
+-        If you're reporting a crash, please enter the crash ID from the crash reporter
+-        opening on the next launch after crash. **You have to enable beta versions
+-        installation in Settings -> Advanced for the reporter to appear.**
+-        You don't have to wait for a beta version to arrive.
+-  - type: textarea
+-    attributes:
+-      label: Logs
+-      description: >
+-        You can find log.txt using the `viewlogs`
+-        [cheat code](https://github.com/telegramdesktop/tdesktop/wiki/Cheat-Codes).
+-      placeholder: Insert log.txt here (if necessary)
+-      render: shell
+diff --git a/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml b/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml
+deleted file mode 100644
+index 2327e1305..000000000
+--- a/.github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml
++++ /dev/null
+@@ -1,29 +0,0 @@
+----
+-name: Feature request
+-description: Suggest an idea.
+-labels: [enhancement]
+-body:
+-  - type: textarea
+-    attributes:
+-      label: Is your feature request related to a problem?
+-      placeholder: A clear and concise description of what the problem is.
+-    validations:
+-      required: true
+-  - type: textarea
+-    attributes:
+-      label: Describe the solution you'd like
+-      placeholder: A clear and concise description of what you want to happen.
+-    validations:
+-      required: true
+-  - type: textarea
+-    attributes:
+-      label: Describe alternatives you've considered
+-      placeholder: A clear and concise description of any alternative solutions or features you've considered.
+-    validations:
+-      required: true
+-  - type: textarea
+-    attributes:
+-      label: Additional context
+-      placeholder: Add any other context or screenshots about the feature request here.
+-    validations:
+-      required: false
+diff --git a/.github/ISSUE_TEMPLATE/config.yml b/.github/ISSUE_TEMPLATE/config.yml
+deleted file mode 100644
+index 014b25725..000000000
+--- a/.github/ISSUE_TEMPLATE/config.yml
++++ /dev/null
+@@ -1,11 +0,0 @@
+-blank_issues_enabled: false
+-contact_links:
+-  - name: API issue
+-    url: https://bugs.telegram.org
+-    about: Any bug report or feature request affecting more than only Telegram Desktop.
+-  - name: Issue of other client
+-    url: https://bugs.telegram.org
+-    about: Any bug report or feature request not about Telegram Desktop.
+-  - name: Question
+-    url: https://t.me/TelegramDesktopTalk
+-    about: Ask a question.
+diff --git a/.github/workflows/copyright_year_updater.yml b/.github/workflows/copyright_year_updater.yml
+deleted file mode 100644
+index 7cb129e36..000000000
+--- a/.github/workflows/copyright_year_updater.yml
++++ /dev/null
+@@ -1,16 +0,0 @@
+-name: Copyright year updater.
+-
+-on:
+-  repository_dispatch:
+-    types: ["Restart copyright_year_updater workflow."]
+-  schedule:
+-    # At 03:00 on January 1.
+-    - cron: "0 3 1 1 *"
+-
+-jobs:
+-  Copyright-year:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: desktop-app/action_code_updater@master
+-        with:
+-          type: "license-year"
+diff --git a/.github/workflows/docker.yml b/.github/workflows/docker.yml
+deleted file mode 100644
+index 520caaf68..000000000
+--- a/.github/workflows/docker.yml
++++ /dev/null
+@@ -1,40 +0,0 @@
+-name: Docker.
+-
+-on:
+-  push:
+-    paths:
+-      - '.github/workflows/docker.yml'
+-      - 'Telegram/build/docker/centos_env/**'
+-  pull_request:
+-    paths:
+-      - '.github/workflows/docker.yml'
+-      - 'Telegram/build/docker/centos_env/**'
+-
+-jobs:
+-  docker:
+-    name: Ubuntu
+-    runs-on: ubuntu-latest
+-
+-    env:
+-      IMAGE_TAG: ghcr.io/${{ github.repository }}/centos_env:latest
+-
+-    steps:
+-      - name: Clone.
+-        uses: actions/checkout@v3.1.0
+-        with:
+-          submodules: recursive
+-
+-      - name: First set up.
+-        run: curl -sSL https://install.python-poetry.org | python3 -
+-
+-      - name: Docker image build.
+-        run: |
+-          cd Telegram/build/docker/centos_env
+-          poetry install
+-          DEBUG= LTO= poetry run gen_dockerfile | DOCKER_BUILDKIT=1 docker build -t $IMAGE_TAG -
+-
+-      - name: Push the Docker image.
+-        if: ${{ github.ref_name == github.event.repository.default_branch }}
+-        run: |
+-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+-          docker push $IMAGE_TAG
+diff --git a/.github/workflows/issue_closer.yml b/.github/workflows/issue_closer.yml
+deleted file mode 100644
+index d3784944f..000000000
+--- a/.github/workflows/issue_closer.yml
++++ /dev/null
+@@ -1,14 +0,0 @@
+-name: Issue closer.
+-
+-on:
+-  issues:
+-    types: opened
+-
+-jobs:
+-  comment:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - name: Process an issue.
+-        uses: desktop-app/action_issue_closer@master
+-        with:
+-          token: ${{ secrets.GITHUB_TOKEN }}
+diff --git a/.github/workflows/linux.yml b/.github/workflows/linux.yml
+deleted file mode 100644
+index 6f2ec36ec..000000000
+--- a/.github/workflows/linux.yml
++++ /dev/null
+@@ -1,131 +0,0 @@
+-name: Linux.
+-
+-on:
+-  push:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/linux.yml'
+-      - 'snap/**'
+-      - 'Telegram/build/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/Resources/winrc/**'
+-      - 'Telegram/SourceFiles/platform/win/**'
+-      - 'Telegram/SourceFiles/platform/mac/**'
+-      - 'Telegram/Telegram/**'
+-      - 'Telegram/configure.bat'
+-      - 'Telegram/Telegram.plist'
+-  pull_request:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/linux.yml'
+-      - 'snap/**'
+-      - 'Telegram/build/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/Resources/winrc/**'
+-      - 'Telegram/SourceFiles/platform/win/**'
+-      - 'Telegram/SourceFiles/platform/mac/**'
+-      - 'Telegram/Telegram/**'
+-      - 'Telegram/configure.bat'
+-      - 'Telegram/Telegram.plist'
+-
+-jobs:
+-
+-  linux:
+-    name: CentOS 7
+-    runs-on: ubuntu-latest
+-    container:
+-      image: ghcr.io/${{ github.repository }}/centos_env
+-      credentials:
+-        username: ${{ github.actor }}
+-        password: ${{ secrets.GITHUB_TOKEN }}
+-
+-    defaults:
+-      run:
+-        shell: scl enable rh-python38 -- scl enable llvm-toolset-7.0 -- scl enable devtoolset-10 -- bash --noprofile --norc -eo pipefail {0}
+-
+-    strategy:
+-      matrix:
+-        defines:
+-          - ""
+-          - "DESKTOP_APP_DISABLE_DBUS_INTEGRATION"
+-          - "DESKTOP_APP_DISABLE_X11_INTEGRATION"
+-          - "DESKTOP_APP_DISABLE_WAYLAND_INTEGRATION"
+-
+-    env:
+-      UPLOAD_ARTIFACT: "false"
+-
+-    steps:
+-      - name: Get repository name.
+-        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+-
+-      - name: Clone.
+-        uses: actions/checkout@v3.1.0
+-        with:
+-          submodules: recursive
+-          path: ${{ env.REPO_NAME }}
+-
+-      - name: First set up.
+-        run: |
+-          gcc --version
+-          ln -s /usr/src/Libraries
+-
+-      - name: Telegram Desktop build.
+-        run: |
+-          cd $REPO_NAME/Telegram
+-
+-          DEFINE=""
+-          if [ -n "${{ matrix.defines }}" ]; then
+-            DEFINE="-D ${{ matrix.defines }}=ON"
+-            echo Define from matrix: $DEFINE
+-            echo "ARTIFACT_NAME=Telegram_${{ matrix.defines }}" >> $GITHUB_ENV
+-          else
+-            echo "ARTIFACT_NAME=Telegram" >> $GITHUB_ENV
+-          fi
+-
+-          ./configure.sh \
+-          -D CMAKE_C_FLAGS_DEBUG="" \
+-          -D CMAKE_CXX_FLAGS_DEBUG="" \
+-          -D CMAKE_C_FLAGS="-Werror" \
+-          -D CMAKE_CXX_FLAGS="-Werror" \
+-          -D CMAKE_EXE_LINKER_FLAGS="-s" \
+-          -D TDESKTOP_API_TEST=ON \
+-          -D DESKTOP_APP_DISABLE_CRASH_REPORTS=OFF \
+-          $DEFINE
+-
+-          cmake --build ../out --config Debug --parallel
+-
+-      - name: Check.
+-        run: |
+-          filePath="$REPO_NAME/out/Debug/Telegram"
+-          if test -f "$filePath"; then
+-            echo "Build successfully done! :)"
+-
+-            size=$(stat -c %s "$filePath")
+-            echo "File size of ${filePath}: ${size} Bytes."
+-          else
+-            echo "Build error, output file does not exist."
+-            exit 1
+-          fi
+-
+-      - name: Move artifact.
+-        if: env.UPLOAD_ARTIFACT == 'true'
+-        run: |
+-          cd $REPO_NAME/out/Debug
+-          mkdir artifact
+-          mv Telegram artifact/
+-      - uses: actions/upload-artifact@master
+-        if: env.UPLOAD_ARTIFACT == 'true'
+-        name: Upload artifact.
+-        with:
+-          name: ${{ env.ARTIFACT_NAME }}
+-          path: ${{ env.REPO_NAME }}/out/Debug/artifact/
+diff --git a/.github/workflows/lock.yml b/.github/workflows/lock.yml
+deleted file mode 100644
+index 562159d0d..000000000
+--- a/.github/workflows/lock.yml
++++ /dev/null
+@@ -1,15 +0,0 @@
+-name: 'Lock Threads'
+-
+-on:
+-  schedule:
+-    - cron: '0 0 * * *'
+-
+-jobs:
+-  lock:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: dessant/lock-threads@v3
+-        with:
+-          github-token: ${{ github.token }}
+-          issue-inactive-days: 45
+-          pr-inactive-days: 45
+diff --git a/.github/workflows/mac.yml b/.github/workflows/mac.yml
+deleted file mode 100644
+index 96bfe6e13..000000000
+--- a/.github/workflows/mac.yml
++++ /dev/null
+@@ -1,138 +0,0 @@
+-name: MacOS.
+-
+-on:
+-  push:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/mac.yml'
+-      - 'lib/xdg/**'
+-      - 'snap/**'
+-      - 'Telegram/build/docker/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/Resources/winrc/**'
+-      - 'Telegram/SourceFiles/platform/win/**'
+-      - 'Telegram/SourceFiles/platform/linux/**'
+-      - 'Telegram/configure.bat'
+-  pull_request:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/mac.yml'
+-      - 'lib/xdg/**'
+-      - 'snap/**'
+-      - 'Telegram/build/docker/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/Resources/winrc/**'
+-      - 'Telegram/SourceFiles/platform/win/**'
+-      - 'Telegram/SourceFiles/platform/linux/**'
+-      - 'Telegram/configure.bat'
+-
+-jobs:
+-
+-  macos:
+-    name: MacOS
+-    runs-on: macos-12
+-
+-    strategy:
+-      matrix:
+-        defines:
+-          - ""
+-    env:
+-      UPLOAD_ARTIFACT: "false"
+-      ONLY_CACHE: "false"
+-      PREPARE_PATH: "Telegram/build/prepare/prepare.py"
+-
+-    steps:
+-      - name: Get repository name.
+-        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+-
+-      - name: Clone.
+-        uses: actions/checkout@v3.1.0
+-        with:
+-          submodules: recursive
+-          path: ${{ env.REPO_NAME }}
+-
+-      - name: First set up.
+-        run: |
+-          sudo chown -R `whoami`:admin /usr/local/share
+-          brew install automake ninja pkg-config
+-
+-          # Disable spotlight.
+-          sudo mdutil -a -i off
+-
+-          sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+-
+-      - name: ThirdParty cache.
+-        id: cache-third-party
+-        uses: actions/cache@v3.0.11
+-        with:
+-          path: ThirdParty
+-          key: ${{ runner.OS }}-third-party-${{ hashFiles(format('{0}/{1}', env.REPO_NAME, env.PREPARE_PATH)) }}
+-          restore-keys: ${{ runner.OS }}-third-party-
+-
+-      - name: Libraries cache.
+-        id: cache-libs
+-        uses: actions/cache@v3.0.11
+-        with:
+-          path: Libraries
+-          key: ${{ runner.OS }}-libs-${{ hashFiles(format('{0}/{1}', env.REPO_NAME, env.PREPARE_PATH)) }}
+-          restore-keys: ${{ runner.OS }}-libs-
+-
+-      - name: Libraries.
+-        run: |
+-          ./$REPO_NAME/Telegram/build/prepare/mac.sh skip-release silent
+-
+-      - name: Free up some disk space.
+-        run: |
+-          cd Libraries
+-          find . -iname "*.dir" -exec rm -rf {} || true \;
+-
+-      - name: Telegram Desktop build.
+-        if: env.ONLY_CACHE == 'false'
+-        run: |
+-          cd $REPO_NAME/Telegram
+-
+-          DEFINE=""
+-          if [ -n "${{ matrix.defines }}" ]; then
+-            DEFINE="-D ${{ matrix.defines }}=ON"
+-            echo Define from matrix: $DEFINE
+-            echo "ARTIFACT_NAME=Telegram_${{ matrix.defines }}" >> $GITHUB_ENV
+-          else
+-            echo "ARTIFACT_NAME=Telegram" >> $GITHUB_ENV
+-          fi
+-
+-          ./configure.sh \
+-          -D CMAKE_C_FLAGS="-Werror" \
+-          -D CMAKE_CXX_FLAGS="-Werror" \
+-          -D CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO \
+-          -D TDESKTOP_API_TEST=ON \
+-          -D DESKTOP_APP_DISABLE_CRASH_REPORTS=OFF \
+-          $DEFINE
+-
+-          cd ../out
+-
+-          xcoderun='xcodebuild build -project Telegram.xcodeproj -scheme Telegram -destination "platform=macOS,arch=x86_64" -configuration Debug'
+-          bash -c "$xcoderun" || bash -c "$xcoderun" || bash -c "$xcoderun"
+-
+-      - name: Move artifact.
+-        if: env.UPLOAD_ARTIFACT == 'true'
+-        run: |
+-          cd $REPO_NAME/out/Debug
+-          mkdir artifact
+-          mv Telegram.app artifact/
+-          mv Updater artifact/
+-      - uses: actions/upload-artifact@master
+-        if: env.UPLOAD_ARTIFACT == 'true'
+-        name: Upload artifact.
+-        with:
+-          name: ${{ env.ARTIFACT_NAME }}
+-          path: ${{ env.REPO_NAME }}/out/Debug/artifact/
+diff --git a/.github/workflows/master_updater.yml b/.github/workflows/master_updater.yml
+deleted file mode 100644
+index dc77d50d0..000000000
+--- a/.github/workflows/master_updater.yml
++++ /dev/null
+@@ -1,35 +0,0 @@
+-name: Master branch updater.
+-
+-on:
+-  release:
+-    types: released
+-
+-jobs:
+-  updater:
+-    runs-on: ubuntu-latest
+-    env:
+-      SKIP: "0"
+-      to_branch: "master"
+-    steps:
+-      - uses: actions/checkout@v3.1.0
+-        if: env.SKIP == '0'
+-      - name: Push the code to the master branch.
+-        if: env.SKIP == '0'
+-        run: |
+-          token=${{ secrets.TOKEN_FOR_MASTER_UPDATER }}
+-          if [ -z "${token}" ]; then
+-              echo "Token is unset. Nothing to do."
+-              exit 0
+-          fi
+-
+-          url=https://x-access-token:$token@github.com/$GITHUB_REPOSITORY
+-          latest_tag=$(git describe --tags --abbrev=0)
+-          echo "Latest tag: $latest_tag"
+-
+-          git remote set-url origin $url
+-          git remote -v
+-          git checkout master
+-          git merge $latest_tag
+-
+-          git push origin HEAD:refs/heads/$to_branch
+-          echo "Done!"
+diff --git a/.github/workflows/no-response.yml b/.github/workflows/no-response.yml
+deleted file mode 100644
+index 4d19e1048..000000000
+--- a/.github/workflows/no-response.yml
++++ /dev/null
+@@ -1,19 +0,0 @@
+-name: No Response
+-
+-# Both `issue_comment` and `scheduled` event types are required for this Action
+-# to work properly.
+-on:
+-  issue_comment:
+-    types: [created]
+-  schedule:
+-    - cron: '0 0 * * *'
+-
+-jobs:
+-  noResponse:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: lee-dohm/no-response@v0.5.0
+-        with:
+-          token: ${{ github.token }}
+-          # Label requiring a response
+-          responseRequiredLabel: waiting for answer
+diff --git a/.github/workflows/snap.yml b/.github/workflows/snap.yml
+deleted file mode 100644
+index 18ad071b8..000000000
+--- a/.github/workflows/snap.yml
++++ /dev/null
+@@ -1,80 +0,0 @@
+-name: Snap.
+-
+-on:
+-  push:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/snap.yml'
+-      - 'Telegram/build/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/Resources/winrc/**'
+-      - 'Telegram/SourceFiles/platform/win/**'
+-      - 'Telegram/SourceFiles/platform/mac/**'
+-      - 'Telegram/Telegram/**'
+-      - 'Telegram/configure.bat'
+-      - 'Telegram/Telegram.plist'
+-  pull_request:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/snap.yml'
+-      - 'Telegram/build/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/Resources/winrc/**'
+-      - 'Telegram/SourceFiles/platform/win/**'
+-      - 'Telegram/SourceFiles/platform/mac/**'
+-      - 'Telegram/Telegram/**'
+-      - 'Telegram/configure.bat'
+-      - 'Telegram/Telegram.plist'
+-
+-jobs:
+-
+-  snap:
+-    name: Ubuntu
+-    runs-on: ubuntu-20.04
+-
+-    env:
+-      UPLOAD_ARTIFACT: "false"
+-
+-    steps:
+-      - name: Clone.
+-        uses: actions/checkout@v3.1.0
+-        with:
+-          fetch-depth: 0
+-          submodules: recursive
+-
+-      - name: First set up.
+-        run: |
+-          sudo iptables -P FORWARD ACCEPT
+-          sudo snap install --classic snapcraft
+-          sudo usermod -aG lxd $USER
+-          sudo snap run lxd init --auto
+-          sudo snap run lxd waitready
+-
+-      - name: Telegram Desktop snap build.
+-        run: sg lxd -c 'snap run snapcraft -v'
+-
+-      - name: Move artifact.
+-        if: env.UPLOAD_ARTIFACT == 'true'
+-        run: |
+-          artifact_name=$(echo telegram-desktop_*.snap)
+-          echo "ARTIFACT_NAME=$artifact_name" >> $GITHUB_ENV
+-
+-          mkdir artifact
+-          mv $artifact_name artifact
+-
+-      - uses: actions/upload-artifact@master
+-        if: env.UPLOAD_ARTIFACT == 'true'
+-        name: Upload artifact.
+-        with:
+-          name: ${{ env.ARTIFACT_NAME }}
+-          path: artifact
+diff --git a/.github/workflows/stale.yml b/.github/workflows/stale.yml
+deleted file mode 100644
+index 219f95a82..000000000
+--- a/.github/workflows/stale.yml
++++ /dev/null
+@@ -1,25 +0,0 @@
+-name: 'Close stale issues and PRs'
+-on:
+-  schedule:
+-    - cron: '30 1 * * *'
+-
+-jobs:
+-  stale:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: actions/stale@v5
+-        with:
+-          stale-issue-message: |
+-            Hey there!
+-
+-            This issue was inactive for a long time and will be automatically closed in 30 days if there isn't any further activity. We therefore assume that the user has lost interest or resolved the problem on their own.
+-
+-            Don't worry though; if this is an error, let us know with a comment and we'll be happy to reopen the issue.
+-
+-            Thanks!
+-          stale-issue-label: 'stale'
+-          exempt-issue-labels: 'enhancement'
+-          days-before-stale: 180
+-          days-before-close: 30
+-          days-before-pr-stale: -1
+-          operations-per-run: 1000
+diff --git a/.github/workflows/user_agent_updater.yml b/.github/workflows/user_agent_updater.yml
+deleted file mode 100644
+index c1713b357..000000000
+--- a/.github/workflows/user_agent_updater.yml
++++ /dev/null
+@@ -1,18 +0,0 @@
+-name: User-agent updater.
+-
+-on:
+-  repository_dispatch:
+-    types: ["Restart user_agent_updater workflow."]
+-  schedule:
+-    # At 00:00 on day-of-month 1.
+-    - cron: "0 0 1 * *"
+-  pull_request_target:
+-    types: [closed]
+-
+-jobs:
+-  User-agent:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: desktop-app/action_code_updater@master
+-        with:
+-          type: "user-agent"
+diff --git a/.github/workflows/win.yml b/.github/workflows/win.yml
+deleted file mode 100644
+index a3f305ce4..000000000
+--- a/.github/workflows/win.yml
++++ /dev/null
+@@ -1,165 +0,0 @@
+-name: Windows.
+-
+-on:
+-  push:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/win.yml'
+-      - 'lib/xdg/**'
+-      - 'snap/**'
+-      - 'Telegram/build/docker/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/SourceFiles/platform/linux/**'
+-      - 'Telegram/SourceFiles/platform/mac/**'
+-      - 'Telegram/Telegram/**'
+-      - 'Telegram/configure.sh'
+-      - 'Telegram/Telegram.plist'
+-  pull_request:
+-    paths-ignore:
+-      - 'docs/**'
+-      - '**.md'
+-      - 'changelog.txt'
+-      - 'LEGAL'
+-      - 'LICENSE'
+-      - '.github/**'
+-      - '!.github/workflows/win.yml'
+-      - 'lib/xdg/**'
+-      - 'snap/**'
+-      - 'Telegram/build/docker/**'
+-      - 'Telegram/Resources/uwp/**'
+-      - 'Telegram/SourceFiles/platform/linux/**'
+-      - 'Telegram/SourceFiles/platform/mac/**'
+-      - 'Telegram/Telegram/**'
+-      - 'Telegram/configure.sh'
+-      - 'Telegram/Telegram.plist'
+-
+-jobs:
+-
+-  windows:
+-    name: Windows
+-    runs-on: windows-2022
+-
+-    strategy:
+-      matrix:
+-        arch: [Win32, x64]
+-
+-    env:
+-      UPLOAD_ARTIFACT: "false"
+-      ONLY_CACHE: "false"
+-      PREPARE_PATH: "Telegram/build/prepare/prepare.py"
+-
+-    defaults:
+-      run:
+-        shell: cmd
+-
+-    steps:
+-      - name: Prepare directories.
+-        run: |
+-          mkdir %userprofile%\TBuild
+-          mklink /d %GITHUB_WORKSPACE%\TBuild %userprofile%\TBuild
+-          echo TBUILD=%GITHUB_WORKSPACE%\TBuild>>%GITHUB_ENV%
+-
+-          mkdir %userprofile%\TBuild Libraries
+-          mklink /d %userprofile%\TBuild\Libraries %GITHUB_WORKSPACE%\Libraries
+-
+-      - name: Get repository name.
+-        shell: bash
+-        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+-
+-      - uses: ilammy/msvc-dev-cmd@v1.12.0
+-        name: Native Tools Command Prompt.
+-        with:
+-          arch: ${{ matrix.arch }}
+-
+-      - name: Clone.
+-        uses: actions/checkout@v3.1.0
+-        with:
+-          submodules: recursive
+-          path: ${{ env.TBUILD }}\${{ env.REPO_NAME }}
+-
+-      - name: Set up environment paths.
+-        shell: bash
+-        run: |
+-          echo "CACHE_KEY=$(sha256sum $TBUILD/$REPO_NAME/$PREPARE_PATH | awk '{ print $1 }')" >> $GITHUB_ENV
+-
+-          echo "Configurate git for cherry-picks."
+-          git config --global user.email "you@example.com"
+-          git config --global user.name "Sample"
+-
+-      - name: NuGet sources.
+-        run: |
+-          nuget sources Disable -Name "Microsoft Visual Studio Offline Packages"
+-          nuget sources Add -Source https://api.nuget.org/v3/index.json & exit 0
+-
+-      - name: Libraries cache.
+-        id: cache-libs
+-        uses: actions/cache@v3.0.11
+-        with:
+-          path: Libraries
+-          key: ${{ runner.OS }}-${{ matrix.arch }}-libs-${{ env.CACHE_KEY }}
+-          restore-keys: ${{ runner.OS }}-${{ matrix.arch }}-libs-
+-
+-      - name: Libraries.
+-        env:
+-          GYP_MSVS_OVERRIDE_PATH: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
+-          GYP_MSVS_VERSION: 2022
+-        run: '%TBUILD%\%REPO_NAME%\Telegram\build\prepare\win.bat skip-release silent'
+-
+-      - name: Read defines.
+-        shell: bash
+-        run: |
+-          DEFINE=""
+-          if [ -n "${{ matrix.defines }}" ]; then
+-            DEFINE="-D ${{ matrix.defines }}=ON"
+-            echo "Define from matrix: $DEFINE"
+-            echo "ARTIFACT_NAME=Telegram_${{ matrix.arch }}_${{ matrix.defines }}" >> $GITHUB_ENV
+-          else
+-            echo "ARTIFACT_NAME=Telegram_${{ matrix.arch }}" >> $GITHUB_ENV
+-          fi
+-          echo "TDESKTOP_BUILD_DEFINE=$DEFINE" >> $GITHUB_ENV
+-
+-          API="-D TDESKTOP_API_TEST=ON"
+-          if [ ${{ github.ref == 'refs/heads/nightly' }} ]; then
+-            echo "Use the open credentials."
+-            API="-D TDESKTOP_API_ID=611335 -D TDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c"
+-          fi
+-          echo "TDESKTOP_BUILD_API=$API" >> $GITHUB_ENV
+-
+-      - name: Free up some disk space.
+-        run: |
+-          del /S Libraries\*.pdb
+-          del /S Libraries\*.pch
+-          del /S Libraries\*.obj
+-
+-      - name: Telegram Desktop build.
+-        if: env.ONLY_CACHE == 'false'
+-        run: |
+-          cd %TBUILD%\%REPO_NAME%\Telegram
+-
+-          call configure.bat ^
+-          ${{ matrix.arch }} ^
+-          %TDESKTOP_BUILD_API% ^
+-          -D DESKTOP_APP_DISABLE_CRASH_REPORTS=OFF ^
+-          -D DESKTOP_APP_NO_PDB=ON ^
+-          %TDESKTOP_BUILD_DEFINE% ^
+-          -DCMAKE_SYSTEM_VERSION=%SDK%
+-
+-          cd ..\out
+-          msbuild -m Telegram.sln /p:Configuration=Debug,Platform=${{ matrix.arch }},DebugSymbols=false,DebugType=none
+-
+-      - name: Move artifact.
+-        if: (env.UPLOAD_ARTIFACT == 'true') || ${{ github.ref == 'refs/heads/nightly' }}
+-        run: |
+-          mkdir artifact
+-          move %TBUILD%\%REPO_NAME%\out\Debug\Telegram.exe artifact/
+-      - uses: actions/upload-artifact@master
+-        name: Upload artifact.
+-        if: (env.UPLOAD_ARTIFACT == 'true') || ${{ github.ref == 'refs/heads/nightly' }}
+-        with:
+-          name: ${{ env.ARTIFACT_NAME }}
+-          path: artifact\
+diff --git a/.github/workflows/winget.yml b/.github/workflows/winget.yml
+deleted file mode 100644
+index a9f25a450..000000000
+--- a/.github/workflows/winget.yml
++++ /dev/null
+@@ -1,18 +0,0 @@
+-name: Publish to WinGet
+-on:
+-  release:
+-    types: [released, prereleased]
+-jobs:
+-  publish:
+-    runs-on: windows-latest # action can only be run on windows
+-    steps:
+-      - if: github.event.action == 'released'
+-        uses: telegramdesktop/winget-releaser@main
+-        with:
+-          identifier: Telegram.TelegramDesktop
+-          token: ${{ secrets.WINGET_TOKEN }}
+-      - if: github.event.action == 'prereleased'
+-        uses: telegramdesktop/winget-releaser@main
+-        with:
+-          identifier: Telegram.TelegramDesktop.Beta
+-          token: ${{ secrets.WINGET_TOKEN }}
+-- 
+2.40.1
+
+
+From e0645cc1ab798e0068f9a99e8b98a13ee9da3153 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 22 Jun 2022 16:57:44 +0400
+Subject: [PATCH 03/13] Disable sponsored messages
+
+---
+ Telegram/SourceFiles/data/data_sponsored_messages.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Telegram/SourceFiles/data/data_sponsored_messages.cpp b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
+index 9f4f992ed..66495ac36 100644
+--- a/Telegram/SourceFiles/data/data_sponsored_messages.cpp
++++ b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
+@@ -175,7 +175,7 @@ void SponsoredMessages::inject(
+ }
+ 
+ bool SponsoredMessages::canHaveFor(not_null<History*> history) const {
+-	return history->peer->isChannel();
++	return false;
+ }
+ 
+ void SponsoredMessages::request(not_null<History*> history, Fn<void()> done) {
+-- 
+2.40.1
+
+
 From 24829f50a5007ba4f4efb1d41bedbdbb0c65ec9d Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 01/10] Cannot react
+Subject: [PATCH 04/13] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 9 +--------
@@ -34,7 +1182,7 @@ index c72d2454f..aa68c988d 100644
 From 8fae29cf719a33b0208d50762be1bb2c3e8efb43 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:52:19 +0400
-Subject: [PATCH 02/10] Always empty reaction list
+Subject: [PATCH 05/13] Always empty reaction list
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 2 +-
@@ -60,7 +1208,7 @@ index aa68c988d..0fc5296ba 100644
 From b6ad16070d50cfcb16f523e2a581275dfd9fa927 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 03/10] Disable webpage preview on my messages
+Subject: [PATCH 06/13] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                            | 4 ++--
@@ -144,7 +1292,7 @@ index 1da520824..7d878b724 100644
 From 979ec46e77b0450b1f5ff423aa77433b53476a28 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 04/10] Disable webpage previews on other users messages
+Subject: [PATCH 07/13] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 18 ++----------------
@@ -186,7 +1334,7 @@ index 0fc5296ba..4e7e3ebe7 100644
 From 23c9ffd9e37cb6ce7ab74b456bd952d96feeaa9c Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 05/10] Disable context menu item N Reacted
+Subject: [PATCH 08/13] Disable context menu item N Reacted
 
 ---
  .../SourceFiles/history/view/history_view_context_menu.cpp     | 3 +--
@@ -213,7 +1361,7 @@ index cc3d8586b..0e4aaa80b 100644
 From 7b3b250e0d1e861bd7883149dd3a3b8ed8403215 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 06/10] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 09/13] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -253,7 +1401,7 @@ index adad8d399..e23f54093 100644
 From 220b3632841669bae177e6a1836814535aff4c21 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 07/10] Disable record button
+Subject: [PATCH 10/13] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp            | 7 +------
@@ -303,7 +1451,7 @@ index 7d878b724..1718e5cdd 100644
 From 3b7c32b04af89d0e9467a01c15e1f61532efa9b5 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 08/10] Disable calls
+Subject: [PATCH 11/13] Disable calls
 
 ---
  .../history/view/history_view_top_bar_widget.cpp         | 9 +--------
@@ -336,7 +1484,7 @@ index 808c26e5d..e57b933b8 100644
 From a06eeeab4e354f53568afdd3dcd43419be8b5393 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 09/10] Disable MUTE/UNMUTE button
+Subject: [PATCH 12/13] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 5 +----
@@ -365,7 +1513,7 @@ index 053344c80..e95a353e5 100644
 From 1aa8a769c466bc2b4b60cbc7b5c1fcf843db3c40 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 28 May 2023 17:23:40 +0400
-Subject: [PATCH 10/10] Drop custom emoji
+Subject: [PATCH 13/13] Drop custom emoji
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 4 ++--
