@@ -1331,15 +1331,30 @@ index 0fc5296ba..4e7e3ebe7 100644
 2.40.1
 
 
-From 23c9ffd9e37cb6ce7ab74b456bd952d96feeaa9c Mon Sep 17 00:00:00 2001
+From 55bc5e4ca37814bfd962af33993a1be8f026bb4b Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
 Subject: [PATCH 08/13] Disable context menu item N Reacted
 
 ---
+ Telegram/SourceFiles/history/history_inner_widget.cpp          | 3 +--
  .../SourceFiles/history/view/history_view_context_menu.cpp     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
+diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
+index c1e0d510a..924a2df9c 100644
+--- a/Telegram/SourceFiles/history/history_inner_widget.cpp
++++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
+@@ -2138,8 +2138,7 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+ 		return item;
+ 	};
+ 	const auto whoReactedItem = groupLeaderOrSelf(_dragStateItem);
+-	const auto hasWhoReactedItem = whoReactedItem
+-		&& Api::WhoReactedExists(whoReactedItem, Api::WhoReactedList::All);
++	const auto hasWhoReactedItem = false;
+ 	const auto clickedReaction = link
+ 		? link->property(
+ 			kReactionsCountEmojiProperty).value<Data::ReactionId>()
 diff --git a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
 index cc3d8586b..0e4aaa80b 100644
 --- a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
@@ -1358,7 +1373,7 @@ index cc3d8586b..0e4aaa80b 100644
 2.40.1
 
 
-From 7b3b250e0d1e861bd7883149dd3a3b8ed8403215 Mon Sep 17 00:00:00 2001
+From a1095d9905e1c2a97458f3b9e2fcf6ca96caf6b9 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
 Subject: [PATCH 09/13] Cannot pin messages; disabled PinnedBar
@@ -1398,7 +1413,7 @@ index adad8d399..e23f54093 100644
 2.40.1
 
 
-From 220b3632841669bae177e6a1836814535aff4c21 Mon Sep 17 00:00:00 2001
+From 6d58a493a4026ce057d2424b3c76a1aef8b1fe36 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
 Subject: [PATCH 10/13] Disable record button
@@ -1448,7 +1463,7 @@ index 7d878b724..1718e5cdd 100644
 2.40.1
 
 
-From 3b7c32b04af89d0e9467a01c15e1f61532efa9b5 Mon Sep 17 00:00:00 2001
+From e07d06f08a639a8542c2ce1a6f89f3d970078eff Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
 Subject: [PATCH 11/13] Disable calls
@@ -1481,7 +1496,7 @@ index 808c26e5d..e57b933b8 100644
 2.40.1
 
 
-From a06eeeab4e354f53568afdd3dcd43419be8b5393 Mon Sep 17 00:00:00 2001
+From b92ac4154b643c11f1eb94eeba18f7e487a80aca Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
 Subject: [PATCH 12/13] Disable MUTE/UNMUTE button
@@ -1510,7 +1525,7 @@ index 053344c80..e95a353e5 100644
 2.40.1
 
 
-From 1aa8a769c466bc2b4b60cbc7b5c1fcf843db3c40 Mon Sep 17 00:00:00 2001
+From 53454ee3579758d5b1b668a25aff4c93bcaeac39 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 28 May 2023 17:23:40 +0400
 Subject: [PATCH 13/13] Drop custom emoji
