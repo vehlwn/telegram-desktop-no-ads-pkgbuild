@@ -1,7 +1,7 @@
-From 72cbfa04430bd035e0d64a7831494b446802232a Mon Sep 17 00:00:00 2001
+From 5b6f2b6497c7c4ee7df41d1dc234103e8fee2d08 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 01/13] Update gitignore
+Subject: [PATCH 01/14] Update gitignore
 
 ---
  .gitignore | 3 +++
@@ -19,50 +19,38 @@ index 678ef32e3..af309cb7d 100644
 +build/
 +compile_commands.json
 -- 
-2.40.1
+2.42.0
 
 
-From 7a29844250a8a7eb36c3126b6b9977a95a08fe0e Mon Sep 17 00:00:00 2001
+From a03d0eda5c932a626413718650bf156b6098f228 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 26 May 2023 07:37:16 +0400
-Subject: [PATCH 02/13] Remove github actions
+Subject: [PATCH 02/14] Remove github actions
 
 ---
- .github/CONTRIBUTING.md                      | 118 -------------
- .github/ISSUE_TEMPLATE/BUG_REPORT.yml        |  78 ---------
+ .github/CONTRIBUTING.md                      | 118 ----------------
+ .github/ISSUE_TEMPLATE/BUG_REPORT.yml        |  78 -----------
  .github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml   |  29 ----
- .github/ISSUE_TEMPLATE/config.yml            |  11 --
- .github/workflows/copyright_year_updater.yml |  16 --
- .github/workflows/docker.yml                 |  40 -----
+ .github/workflows/copyright_year_updater.yml |  16 ---
  .github/workflows/issue_closer.yml           |  14 --
- .github/workflows/linux.yml                  | 131 ---------------
  .github/workflows/lock.yml                   |  15 --
- .github/workflows/mac.yml                    | 138 ----------------
- .github/workflows/master_updater.yml         |  35 ----
+ .github/workflows/mac.yml                    | 138 -------------------
+ .github/workflows/master_updater.yml         |  35 -----
  .github/workflows/no-response.yml            |  19 ---
- .github/workflows/snap.yml                   |  80 ---------
- .github/workflows/stale.yml                  |  25 ---
- .github/workflows/user_agent_updater.yml     |  18 --
- .github/workflows/win.yml                    | 165 -------------------
- .github/workflows/winget.yml                 |  18 --
- 17 files changed, 950 deletions(-)
+ .github/workflows/stale.yml                  |  25 ----
+ .github/workflows/user_agent_updater.yml     |  18 ---
+ 11 files changed, 505 deletions(-)
  delete mode 100644 .github/CONTRIBUTING.md
  delete mode 100644 .github/ISSUE_TEMPLATE/BUG_REPORT.yml
  delete mode 100644 .github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml
- delete mode 100644 .github/ISSUE_TEMPLATE/config.yml
  delete mode 100644 .github/workflows/copyright_year_updater.yml
- delete mode 100644 .github/workflows/docker.yml
  delete mode 100644 .github/workflows/issue_closer.yml
- delete mode 100644 .github/workflows/linux.yml
  delete mode 100644 .github/workflows/lock.yml
  delete mode 100644 .github/workflows/mac.yml
  delete mode 100644 .github/workflows/master_updater.yml
  delete mode 100644 .github/workflows/no-response.yml
- delete mode 100644 .github/workflows/snap.yml
  delete mode 100644 .github/workflows/stale.yml
  delete mode 100644 .github/workflows/user_agent_updater.yml
- delete mode 100644 .github/workflows/win.yml
- delete mode 100644 .github/workflows/winget.yml
 
 diff --git a/.github/CONTRIBUTING.md b/.github/CONTRIBUTING.md
 deleted file mode 100644
@@ -307,23 +295,6 @@ index 2327e1305..000000000
 -      placeholder: Add any other context or screenshots about the feature request here.
 -    validations:
 -      required: false
-diff --git a/.github/ISSUE_TEMPLATE/config.yml b/.github/ISSUE_TEMPLATE/config.yml
-deleted file mode 100644
-index 014b25725..000000000
---- a/.github/ISSUE_TEMPLATE/config.yml
-+++ /dev/null
-@@ -1,11 +0,0 @@
--blank_issues_enabled: false
--contact_links:
--  - name: API issue
--    url: https://bugs.telegram.org
--    about: Any bug report or feature request affecting more than only Telegram Desktop.
--  - name: Issue of other client
--    url: https://bugs.telegram.org
--    about: Any bug report or feature request not about Telegram Desktop.
--  - name: Question
--    url: https://t.me/TelegramDesktopTalk
--    about: Ask a question.
 diff --git a/.github/workflows/copyright_year_updater.yml b/.github/workflows/copyright_year_updater.yml
 deleted file mode 100644
 index 7cb129e36..000000000
@@ -346,52 +317,6 @@ index 7cb129e36..000000000
 -      - uses: desktop-app/action_code_updater@master
 -        with:
 -          type: "license-year"
-diff --git a/.github/workflows/docker.yml b/.github/workflows/docker.yml
-deleted file mode 100644
-index 520caaf68..000000000
---- a/.github/workflows/docker.yml
-+++ /dev/null
-@@ -1,40 +0,0 @@
--name: Docker.
--
--on:
--  push:
--    paths:
--      - '.github/workflows/docker.yml'
--      - 'Telegram/build/docker/centos_env/**'
--  pull_request:
--    paths:
--      - '.github/workflows/docker.yml'
--      - 'Telegram/build/docker/centos_env/**'
--
--jobs:
--  docker:
--    name: Ubuntu
--    runs-on: ubuntu-latest
--
--    env:
--      IMAGE_TAG: ghcr.io/${{ github.repository }}/centos_env:latest
--
--    steps:
--      - name: Clone.
--        uses: actions/checkout@v3.1.0
--        with:
--          submodules: recursive
--
--      - name: First set up.
--        run: curl -sSL https://install.python-poetry.org | python3 -
--
--      - name: Docker image build.
--        run: |
--          cd Telegram/build/docker/centos_env
--          poetry install
--          DEBUG= LTO= poetry run gen_dockerfile | DOCKER_BUILDKIT=1 docker build -t $IMAGE_TAG -
--
--      - name: Push the Docker image.
--        if: ${{ github.ref_name == github.event.repository.default_branch }}
--        run: |
--          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
--          docker push $IMAGE_TAG
 diff --git a/.github/workflows/issue_closer.yml b/.github/workflows/issue_closer.yml
 deleted file mode 100644
 index d3784944f..000000000
@@ -412,143 +337,6 @@ index d3784944f..000000000
 -        uses: desktop-app/action_issue_closer@master
 -        with:
 -          token: ${{ secrets.GITHUB_TOKEN }}
-diff --git a/.github/workflows/linux.yml b/.github/workflows/linux.yml
-deleted file mode 100644
-index 6f2ec36ec..000000000
---- a/.github/workflows/linux.yml
-+++ /dev/null
-@@ -1,131 +0,0 @@
--name: Linux.
--
--on:
--  push:
--    paths-ignore:
--      - 'docs/**'
--      - '**.md'
--      - 'changelog.txt'
--      - 'LEGAL'
--      - 'LICENSE'
--      - '.github/**'
--      - '!.github/workflows/linux.yml'
--      - 'snap/**'
--      - 'Telegram/build/**'
--      - 'Telegram/Resources/uwp/**'
--      - 'Telegram/Resources/winrc/**'
--      - 'Telegram/SourceFiles/platform/win/**'
--      - 'Telegram/SourceFiles/platform/mac/**'
--      - 'Telegram/Telegram/**'
--      - 'Telegram/configure.bat'
--      - 'Telegram/Telegram.plist'
--  pull_request:
--    paths-ignore:
--      - 'docs/**'
--      - '**.md'
--      - 'changelog.txt'
--      - 'LEGAL'
--      - 'LICENSE'
--      - '.github/**'
--      - '!.github/workflows/linux.yml'
--      - 'snap/**'
--      - 'Telegram/build/**'
--      - 'Telegram/Resources/uwp/**'
--      - 'Telegram/Resources/winrc/**'
--      - 'Telegram/SourceFiles/platform/win/**'
--      - 'Telegram/SourceFiles/platform/mac/**'
--      - 'Telegram/Telegram/**'
--      - 'Telegram/configure.bat'
--      - 'Telegram/Telegram.plist'
--
--jobs:
--
--  linux:
--    name: CentOS 7
--    runs-on: ubuntu-latest
--    container:
--      image: ghcr.io/${{ github.repository }}/centos_env
--      credentials:
--        username: ${{ github.actor }}
--        password: ${{ secrets.GITHUB_TOKEN }}
--
--    defaults:
--      run:
--        shell: scl enable rh-python38 -- scl enable llvm-toolset-7.0 -- scl enable devtoolset-10 -- bash --noprofile --norc -eo pipefail {0}
--
--    strategy:
--      matrix:
--        defines:
--          - ""
--          - "DESKTOP_APP_DISABLE_DBUS_INTEGRATION"
--          - "DESKTOP_APP_DISABLE_X11_INTEGRATION"
--          - "DESKTOP_APP_DISABLE_WAYLAND_INTEGRATION"
--
--    env:
--      UPLOAD_ARTIFACT: "false"
--
--    steps:
--      - name: Get repository name.
--        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
--
--      - name: Clone.
--        uses: actions/checkout@v3.1.0
--        with:
--          submodules: recursive
--          path: ${{ env.REPO_NAME }}
--
--      - name: First set up.
--        run: |
--          gcc --version
--          ln -s /usr/src/Libraries
--
--      - name: Telegram Desktop build.
--        run: |
--          cd $REPO_NAME/Telegram
--
--          DEFINE=""
--          if [ -n "${{ matrix.defines }}" ]; then
--            DEFINE="-D ${{ matrix.defines }}=ON"
--            echo Define from matrix: $DEFINE
--            echo "ARTIFACT_NAME=Telegram_${{ matrix.defines }}" >> $GITHUB_ENV
--          else
--            echo "ARTIFACT_NAME=Telegram" >> $GITHUB_ENV
--          fi
--
--          ./configure.sh \
--          -D CMAKE_C_FLAGS_DEBUG="" \
--          -D CMAKE_CXX_FLAGS_DEBUG="" \
--          -D CMAKE_C_FLAGS="-Werror" \
--          -D CMAKE_CXX_FLAGS="-Werror" \
--          -D CMAKE_EXE_LINKER_FLAGS="-s" \
--          -D TDESKTOP_API_TEST=ON \
--          -D DESKTOP_APP_DISABLE_CRASH_REPORTS=OFF \
--          $DEFINE
--
--          cmake --build ../out --config Debug --parallel
--
--      - name: Check.
--        run: |
--          filePath="$REPO_NAME/out/Debug/Telegram"
--          if test -f "$filePath"; then
--            echo "Build successfully done! :)"
--
--            size=$(stat -c %s "$filePath")
--            echo "File size of ${filePath}: ${size} Bytes."
--          else
--            echo "Build error, output file does not exist."
--            exit 1
--          fi
--
--      - name: Move artifact.
--        if: env.UPLOAD_ARTIFACT == 'true'
--        run: |
--          cd $REPO_NAME/out/Debug
--          mkdir artifact
--          mv Telegram artifact/
--      - uses: actions/upload-artifact@master
--        if: env.UPLOAD_ARTIFACT == 'true'
--        name: Upload artifact.
--        with:
--          name: ${{ env.ARTIFACT_NAME }}
--          path: ${{ env.REPO_NAME }}/out/Debug/artifact/
 diff --git a/.github/workflows/lock.yml b/.github/workflows/lock.yml
 deleted file mode 100644
 index 562159d0d..000000000
@@ -780,92 +568,6 @@ index 4d19e1048..000000000
 -          token: ${{ github.token }}
 -          # Label requiring a response
 -          responseRequiredLabel: waiting for answer
-diff --git a/.github/workflows/snap.yml b/.github/workflows/snap.yml
-deleted file mode 100644
-index 18ad071b8..000000000
---- a/.github/workflows/snap.yml
-+++ /dev/null
-@@ -1,80 +0,0 @@
--name: Snap.
--
--on:
--  push:
--    paths-ignore:
--      - 'docs/**'
--      - '**.md'
--      - 'changelog.txt'
--      - 'LEGAL'
--      - 'LICENSE'
--      - '.github/**'
--      - '!.github/workflows/snap.yml'
--      - 'Telegram/build/**'
--      - 'Telegram/Resources/uwp/**'
--      - 'Telegram/Resources/winrc/**'
--      - 'Telegram/SourceFiles/platform/win/**'
--      - 'Telegram/SourceFiles/platform/mac/**'
--      - 'Telegram/Telegram/**'
--      - 'Telegram/configure.bat'
--      - 'Telegram/Telegram.plist'
--  pull_request:
--    paths-ignore:
--      - 'docs/**'
--      - '**.md'
--      - 'changelog.txt'
--      - 'LEGAL'
--      - 'LICENSE'
--      - '.github/**'
--      - '!.github/workflows/snap.yml'
--      - 'Telegram/build/**'
--      - 'Telegram/Resources/uwp/**'
--      - 'Telegram/Resources/winrc/**'
--      - 'Telegram/SourceFiles/platform/win/**'
--      - 'Telegram/SourceFiles/platform/mac/**'
--      - 'Telegram/Telegram/**'
--      - 'Telegram/configure.bat'
--      - 'Telegram/Telegram.plist'
--
--jobs:
--
--  snap:
--    name: Ubuntu
--    runs-on: ubuntu-20.04
--
--    env:
--      UPLOAD_ARTIFACT: "false"
--
--    steps:
--      - name: Clone.
--        uses: actions/checkout@v3.1.0
--        with:
--          fetch-depth: 0
--          submodules: recursive
--
--      - name: First set up.
--        run: |
--          sudo iptables -P FORWARD ACCEPT
--          sudo snap install --classic snapcraft
--          sudo usermod -aG lxd $USER
--          sudo snap run lxd init --auto
--          sudo snap run lxd waitready
--
--      - name: Telegram Desktop snap build.
--        run: sg lxd -c 'snap run snapcraft -v'
--
--      - name: Move artifact.
--        if: env.UPLOAD_ARTIFACT == 'true'
--        run: |
--          artifact_name=$(echo telegram-desktop_*.snap)
--          echo "ARTIFACT_NAME=$artifact_name" >> $GITHUB_ENV
--
--          mkdir artifact
--          mv $artifact_name artifact
--
--      - uses: actions/upload-artifact@master
--        if: env.UPLOAD_ARTIFACT == 'true'
--        name: Upload artifact.
--        with:
--          name: ${{ env.ARTIFACT_NAME }}
--          path: artifact
 diff --git a/.github/workflows/stale.yml b/.github/workflows/stale.yml
 deleted file mode 100644
 index 219f95a82..000000000
@@ -921,216 +623,21 @@ index c1713b357..000000000
 -      - uses: desktop-app/action_code_updater@master
 -        with:
 -          type: "user-agent"
-diff --git a/.github/workflows/win.yml b/.github/workflows/win.yml
-deleted file mode 100644
-index a3f305ce4..000000000
---- a/.github/workflows/win.yml
-+++ /dev/null
-@@ -1,165 +0,0 @@
--name: Windows.
--
--on:
--  push:
--    paths-ignore:
--      - 'docs/**'
--      - '**.md'
--      - 'changelog.txt'
--      - 'LEGAL'
--      - 'LICENSE'
--      - '.github/**'
--      - '!.github/workflows/win.yml'
--      - 'lib/xdg/**'
--      - 'snap/**'
--      - 'Telegram/build/docker/**'
--      - 'Telegram/Resources/uwp/**'
--      - 'Telegram/SourceFiles/platform/linux/**'
--      - 'Telegram/SourceFiles/platform/mac/**'
--      - 'Telegram/Telegram/**'
--      - 'Telegram/configure.sh'
--      - 'Telegram/Telegram.plist'
--  pull_request:
--    paths-ignore:
--      - 'docs/**'
--      - '**.md'
--      - 'changelog.txt'
--      - 'LEGAL'
--      - 'LICENSE'
--      - '.github/**'
--      - '!.github/workflows/win.yml'
--      - 'lib/xdg/**'
--      - 'snap/**'
--      - 'Telegram/build/docker/**'
--      - 'Telegram/Resources/uwp/**'
--      - 'Telegram/SourceFiles/platform/linux/**'
--      - 'Telegram/SourceFiles/platform/mac/**'
--      - 'Telegram/Telegram/**'
--      - 'Telegram/configure.sh'
--      - 'Telegram/Telegram.plist'
--
--jobs:
--
--  windows:
--    name: Windows
--    runs-on: windows-2022
--
--    strategy:
--      matrix:
--        arch: [Win32, x64]
--
--    env:
--      UPLOAD_ARTIFACT: "false"
--      ONLY_CACHE: "false"
--      PREPARE_PATH: "Telegram/build/prepare/prepare.py"
--
--    defaults:
--      run:
--        shell: cmd
--
--    steps:
--      - name: Prepare directories.
--        run: |
--          mkdir %userprofile%\TBuild
--          mklink /d %GITHUB_WORKSPACE%\TBuild %userprofile%\TBuild
--          echo TBUILD=%GITHUB_WORKSPACE%\TBuild>>%GITHUB_ENV%
--
--          mkdir %userprofile%\TBuild Libraries
--          mklink /d %userprofile%\TBuild\Libraries %GITHUB_WORKSPACE%\Libraries
--
--      - name: Get repository name.
--        shell: bash
--        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
--
--      - uses: ilammy/msvc-dev-cmd@v1.12.0
--        name: Native Tools Command Prompt.
--        with:
--          arch: ${{ matrix.arch }}
--
--      - name: Clone.
--        uses: actions/checkout@v3.1.0
--        with:
--          submodules: recursive
--          path: ${{ env.TBUILD }}\${{ env.REPO_NAME }}
--
--      - name: Set up environment paths.
--        shell: bash
--        run: |
--          echo "CACHE_KEY=$(sha256sum $TBUILD/$REPO_NAME/$PREPARE_PATH | awk '{ print $1 }')" >> $GITHUB_ENV
--
--          echo "Configurate git for cherry-picks."
--          git config --global user.email "you@example.com"
--          git config --global user.name "Sample"
--
--      - name: NuGet sources.
--        run: |
--          nuget sources Disable -Name "Microsoft Visual Studio Offline Packages"
--          nuget sources Add -Source https://api.nuget.org/v3/index.json & exit 0
--
--      - name: Libraries cache.
--        id: cache-libs
--        uses: actions/cache@v3.0.11
--        with:
--          path: Libraries
--          key: ${{ runner.OS }}-${{ matrix.arch }}-libs-${{ env.CACHE_KEY }}
--          restore-keys: ${{ runner.OS }}-${{ matrix.arch }}-libs-
--
--      - name: Libraries.
--        env:
--          GYP_MSVS_OVERRIDE_PATH: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
--          GYP_MSVS_VERSION: 2022
--        run: '%TBUILD%\%REPO_NAME%\Telegram\build\prepare\win.bat skip-release silent'
--
--      - name: Read defines.
--        shell: bash
--        run: |
--          DEFINE=""
--          if [ -n "${{ matrix.defines }}" ]; then
--            DEFINE="-D ${{ matrix.defines }}=ON"
--            echo "Define from matrix: $DEFINE"
--            echo "ARTIFACT_NAME=Telegram_${{ matrix.arch }}_${{ matrix.defines }}" >> $GITHUB_ENV
--          else
--            echo "ARTIFACT_NAME=Telegram_${{ matrix.arch }}" >> $GITHUB_ENV
--          fi
--          echo "TDESKTOP_BUILD_DEFINE=$DEFINE" >> $GITHUB_ENV
--
--          API="-D TDESKTOP_API_TEST=ON"
--          if [ ${{ github.ref == 'refs/heads/nightly' }} ]; then
--            echo "Use the open credentials."
--            API="-D TDESKTOP_API_ID=611335 -D TDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c"
--          fi
--          echo "TDESKTOP_BUILD_API=$API" >> $GITHUB_ENV
--
--      - name: Free up some disk space.
--        run: |
--          del /S Libraries\*.pdb
--          del /S Libraries\*.pch
--          del /S Libraries\*.obj
--
--      - name: Telegram Desktop build.
--        if: env.ONLY_CACHE == 'false'
--        run: |
--          cd %TBUILD%\%REPO_NAME%\Telegram
--
--          call configure.bat ^
--          ${{ matrix.arch }} ^
--          %TDESKTOP_BUILD_API% ^
--          -D DESKTOP_APP_DISABLE_CRASH_REPORTS=OFF ^
--          -D DESKTOP_APP_NO_PDB=ON ^
--          %TDESKTOP_BUILD_DEFINE% ^
--          -DCMAKE_SYSTEM_VERSION=%SDK%
--
--          cd ..\out
--          msbuild -m Telegram.sln /p:Configuration=Debug,Platform=${{ matrix.arch }},DebugSymbols=false,DebugType=none
--
--      - name: Move artifact.
--        if: (env.UPLOAD_ARTIFACT == 'true') || ${{ github.ref == 'refs/heads/nightly' }}
--        run: |
--          mkdir artifact
--          move %TBUILD%\%REPO_NAME%\out\Debug\Telegram.exe artifact/
--      - uses: actions/upload-artifact@master
--        name: Upload artifact.
--        if: (env.UPLOAD_ARTIFACT == 'true') || ${{ github.ref == 'refs/heads/nightly' }}
--        with:
--          name: ${{ env.ARTIFACT_NAME }}
--          path: artifact\
-diff --git a/.github/workflows/winget.yml b/.github/workflows/winget.yml
-deleted file mode 100644
-index a9f25a450..000000000
---- a/.github/workflows/winget.yml
-+++ /dev/null
-@@ -1,18 +0,0 @@
--name: Publish to WinGet
--on:
--  release:
--    types: [released, prereleased]
--jobs:
--  publish:
--    runs-on: windows-latest # action can only be run on windows
--    steps:
--      - if: github.event.action == 'released'
--        uses: telegramdesktop/winget-releaser@main
--        with:
--          identifier: Telegram.TelegramDesktop
--          token: ${{ secrets.WINGET_TOKEN }}
--      - if: github.event.action == 'prereleased'
--        uses: telegramdesktop/winget-releaser@main
--        with:
--          identifier: Telegram.TelegramDesktop.Beta
--          token: ${{ secrets.WINGET_TOKEN }}
 -- 
-2.40.1
+2.42.0
 
 
-From e0645cc1ab798e0068f9a99e8b98a13ee9da3153 Mon Sep 17 00:00:00 2001
+From b6ba47f04548a234dfe51619de43431a1d1a96cc Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 03/13] Disable sponsored messages
+Subject: [PATCH 03/14] Disable sponsored messages
 
 ---
  Telegram/SourceFiles/data/data_sponsored_messages.cpp | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Telegram/SourceFiles/data/data_sponsored_messages.cpp b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
-index 9f4f992ed..66495ac36 100644
+index ea42a0fe2..c544eee26 100644
 --- a/Telegram/SourceFiles/data/data_sponsored_messages.cpp
 +++ b/Telegram/SourceFiles/data/data_sponsored_messages.cpp
 @@ -175,7 +175,7 @@ void SponsoredMessages::inject(
@@ -1143,23 +650,23 @@ index 9f4f992ed..66495ac36 100644
  
  void SponsoredMessages::request(not_null<History*> history, Fn<void()> done) {
 -- 
-2.40.1
+2.42.0
 
 
-From 24829f50a5007ba4f4efb1d41bedbdbb0c65ec9d Mon Sep 17 00:00:00 2001
+From 94c5d18a290830336becf9f583c0b071eb0e3df0 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 04/13] Cannot react
+Subject: [PATCH 04/14] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 9 +--------
  1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index c72d2454f..aa68c988d 100644
+index c4c7e3546..ddcd9f4c7 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -2128,14 +2128,7 @@ void HistoryItem::translationDone(LanguageId to, TextWithEntities result) {
+@@ -2242,14 +2242,7 @@ void HistoryItem::translationDone(LanguageId to, TextWithEntities result) {
  }
  
  bool HistoryItem::canReact() const {
@@ -1176,23 +683,23 @@ index c72d2454f..aa68c988d 100644
  
  void HistoryItem::toggleReaction(
 -- 
-2.40.1
+2.42.0
 
 
-From 8fae29cf719a33b0208d50762be1bb2c3e8efb43 Mon Sep 17 00:00:00 2001
+From 080de13048a8672906eaab6052f3181c40556a3f Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:52:19 +0400
-Subject: [PATCH 05/13] Always empty reaction list
+Subject: [PATCH 05/14] Always empty reaction list
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index aa68c988d..0fc5296ba 100644
+index ddcd9f4c7..de2357a3c 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -2161,7 +2161,7 @@ void HistoryItem::updateReactionsUnknown() {
+@@ -2275,7 +2275,7 @@ void HistoryItem::updateReactionsUnknown() {
  
  const std::vector<Data::MessageReaction> &HistoryItem::reactions() const {
  	static const auto kEmpty = std::vector<Data::MessageReaction>();
@@ -1202,13 +709,13 @@ index aa68c988d..0fc5296ba 100644
  
  auto HistoryItem::recentReactions() const
 -- 
-2.40.1
+2.42.0
 
 
-From b6ad16070d50cfcb16f523e2a581275dfd9fa927 Mon Sep 17 00:00:00 2001
+From 9742226af310e35576ba7b56c62c7d27e748910a Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 06/13] Disable webpage preview on my messages
+Subject: [PATCH 06/14] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                            | 4 ++--
@@ -1217,10 +724,10 @@ Subject: [PATCH 06/13] Disable webpage preview on my messages
  3 files changed, 6 insertions(+), 9 deletions(-)
 
 diff --git a/Telegram/SourceFiles/apiwrap.cpp b/Telegram/SourceFiles/apiwrap.cpp
-index a589be492..b067070fd 100644
+index 75f4047b3..f1b7d861a 100644
 --- a/Telegram/SourceFiles/apiwrap.cpp
 +++ b/Telegram/SourceFiles/apiwrap.cpp
-@@ -2116,7 +2116,7 @@ void ApiWrap::saveDraftsToCloud() {
+@@ -2136,7 +2136,7 @@ void ApiWrap::saveDraftsToCloud() {
  
  		auto flags = MTPmessages_SaveDraft::Flags(0);
  		auto &textWithTags = cloudDraft->textWithTags;
@@ -1229,7 +736,7 @@ index a589be492..b067070fd 100644
  			flags |= MTPmessages_SaveDraft::Flag::f_no_webpage;
  		}
  		if (cloudDraft->msgId) {
-@@ -3585,7 +3585,7 @@ void ApiWrap::sendMessage(MessageToSend &&message) {
+@@ -3623,7 +3623,7 @@ void ApiWrap::sendMessage(MessageToSend &&message) {
  		}
  		const auto replyHeader = NewMessageReplyHeader(action);
  		MTPMessageMedia media = MTP_messageMediaEmpty();
@@ -1239,10 +746,10 @@ index a589be492..b067070fd 100644
  		} else if (message.webPageId) {
  			auto page = _session->data().webpage(message.webPageId);
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index cd07b0767..adad8d399 100644
+index c1dbc9911..d1e6f9ea2 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -3789,7 +3789,7 @@ void HistoryWidget::saveEditMsg() {
+@@ -3828,7 +3828,7 @@ void HistoryWidget::saveEditMsg() {
  	};
  
  	auto options = Api::SendOptions();
@@ -1251,7 +758,7 @@ index cd07b0767..adad8d399 100644
  	_saveEditMsgRequestId = Api::EditTextMessage(
  		item,
  		sending,
-@@ -7292,9 +7292,7 @@ void HistoryWidget::previewCancel() {
+@@ -7386,9 +7386,7 @@ void HistoryWidget::previewCancel() {
  }
  
  void HistoryWidget::checkPreview() {
@@ -1263,10 +770,10 @@ index cd07b0767..adad8d399 100644
  		previewCancel();
  		return;
 diff --git a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
-index 1da520824..7d878b724 100644
+index cb1affa57..951476e4d 100644
 --- a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
 +++ b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
-@@ -294,8 +294,7 @@ void WebpageProcessor::getWebPagePreview() {
+@@ -300,8 +300,7 @@ void WebpageProcessor::getWebPagePreview() {
  }
  
  void WebpageProcessor::checkPreview() {
@@ -1276,7 +783,7 @@ index 1da520824..7d878b724 100644
  	if (_previewState != Data::PreviewState::Allowed
  		|| previewRestricted) {
  		cancel();
-@@ -908,7 +907,7 @@ MessageToEdit FieldHeader::queryToEdit() {
+@@ -1026,7 +1025,7 @@ MessageToEdit FieldHeader::queryToEdit() {
  		.fullId = item->fullId(),
  		.options = {
  			.scheduled = item->isScheduled() ? item->date() : 0,
@@ -1286,23 +793,23 @@ index 1da520824..7d878b724 100644
  	};
  }
 -- 
-2.40.1
+2.42.0
 
 
-From 979ec46e77b0450b1f5ff423aa77433b53476a28 Mon Sep 17 00:00:00 2001
+From daf91c1663563fd673480a5e86b29119a537cae5 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 07/13] Disable webpage previews on other users messages
+Subject: [PATCH 07/14] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 18 ++----------------
  1 file changed, 2 insertions(+), 16 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index 0fc5296ba..4e7e3ebe7 100644
+index de2357a3c..836ecda6c 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -233,22 +233,8 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
+@@ -250,22 +250,8 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
  		}, [](const MTPDdocumentEmpty &) -> Result {
  			return nullptr;
  		});
@@ -1328,13 +835,13 @@ index 0fc5296ba..4e7e3ebe7 100644
  		return media.vgame().match([&](const MTPDgame &game) {
  			return std::make_unique<Data::MediaGame>(
 -- 
-2.40.1
+2.42.0
 
 
-From 55bc5e4ca37814bfd962af33993a1be8f026bb4b Mon Sep 17 00:00:00 2001
+From 02425e9f167e0a292b97c1891326733b7c3369c5 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 08/13] Disable context menu item N Reacted
+Subject: [PATCH 08/14] Disable context menu item N Reacted
 
 ---
  Telegram/SourceFiles/history/history_inner_widget.cpp          | 3 +--
@@ -1342,10 +849,10 @@ Subject: [PATCH 08/13] Disable context menu item N Reacted
  2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index c1e0d510a..924a2df9c 100644
+index 0d0489dd8..bbb98f97a 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
-@@ -2138,8 +2138,7 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+@@ -2123,8 +2123,7 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
  		return item;
  	};
  	const auto whoReactedItem = groupLeaderOrSelf(_dragStateItem);
@@ -1356,10 +863,10 @@ index c1e0d510a..924a2df9c 100644
  		? link->property(
  			kReactionsCountEmojiProperty).value<Data::ReactionId>()
 diff --git a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
-index cc3d8586b..0e4aaa80b 100644
+index 409ae264d..7c59fd5fe 100644
 --- a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
-@@ -987,8 +987,7 @@ base::unique_qptr<Ui::PopupMenu> FillContextMenu(
+@@ -988,8 +988,7 @@ base::unique_qptr<Ui::PopupMenu> FillContextMenu(
  		: nullptr;
  	const auto hasSelection = !request.selectedItems.empty()
  		|| !request.selectedText.empty();
@@ -1370,13 +877,13 @@ index cc3d8586b..0e4aaa80b 100644
  	auto result = base::make_unique_q<Ui::PopupMenu>(
  		list,
 -- 
-2.40.1
+2.42.0
 
 
-From a1095d9905e1c2a97458f3b9e2fcf6ca96caf6b9 Mon Sep 17 00:00:00 2001
+From 1297d43956d543da8496f69dccecc2b6a9e53393 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 09/13] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 09/14] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -1384,10 +891,10 @@ Subject: [PATCH 09/13] Cannot pin messages; disabled PinnedBar
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Telegram/SourceFiles/data/data_peer.cpp b/Telegram/SourceFiles/data/data_peer.cpp
-index 42c548438..c6751fe45 100644
+index 00c183161..b64974d19 100644
 --- a/Telegram/SourceFiles/data/data_peer.cpp
 +++ b/Telegram/SourceFiles/data/data_peer.cpp
-@@ -950,7 +950,7 @@ Data::RestrictionCheckResult PeerData::amRestricted(
+@@ -976,7 +976,7 @@ Data::RestrictionCheckResult PeerData::amRestricted(
  				: Result::Allowed())
  			: (right == ChatRestriction::PinMessages)
  			? ((user->flags() & UserDataFlag::CanPinMessages)
@@ -1397,10 +904,10 @@ index 42c548438..c6751fe45 100644
  			: Result::Allowed();
  	} else if (const auto channel = asChannel()) {
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index adad8d399..e23f54093 100644
+index d1e6f9ea2..6a5aec26e 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -6483,7 +6483,7 @@ void HistoryWidget::checkPinnedBarState() {
+@@ -6566,7 +6566,7 @@ void HistoryWidget::checkPinnedBarState() {
  		}
  		return;
  	}
@@ -1410,13 +917,13 @@ index adad8d399..e23f54093 100644
  	}
  
 -- 
-2.40.1
+2.42.0
 
 
-From 6d58a493a4026ce057d2424b3c76a1aef8b1fe36 Mon Sep 17 00:00:00 2001
+From c96c6ef4784c143d15ba29891de0f0e6ea562416 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 10/13] Disable record button
+Subject: [PATCH 10/14] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp            | 7 +------
@@ -1424,10 +931,10 @@ Subject: [PATCH 10/13] Disable record button
  2 files changed, 2 insertions(+), 12 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index e23f54093..053344c80 100644
+index 6a5aec26e..e4d082b4c 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -4545,12 +4545,7 @@ bool HistoryWidget::isSearching() const {
+@@ -4585,12 +4585,7 @@ bool HistoryWidget::isSearching() const {
  }
  
  bool HistoryWidget::showRecordButton() const {
@@ -1442,10 +949,10 @@ index e23f54093..053344c80 100644
  
  bool HistoryWidget::showInlineBotCancel() const {
 diff --git a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
-index 7d878b724..1718e5cdd 100644
+index 951476e4d..93f56757b 100644
 --- a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
 +++ b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
-@@ -1477,12 +1477,7 @@ void ComposeControls::orderControls() {
+@@ -1681,12 +1681,7 @@ void ComposeControls::orderControls() {
  }
  
  bool ComposeControls::showRecordButton() const {
@@ -1460,23 +967,23 @@ index 7d878b724..1718e5cdd 100644
  
  void ComposeControls::clearListenState() {
 -- 
-2.40.1
+2.42.0
 
 
-From e07d06f08a639a8542c2ce1a6f89f3d970078eff Mon Sep 17 00:00:00 2001
+From 1424a8d0ca1a0e386fca4a6884b57163fe4478ab Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 11/13] Disable calls
+Subject: [PATCH 11/14] Disable calls
 
 ---
  .../history/view/history_view_top_bar_widget.cpp         | 9 +--------
  1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp b/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
-index 808c26e5d..e57b933b8 100644
+index 577ebaff8..319711d43 100644
 --- a/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
-@@ -1090,14 +1090,7 @@ void TopBarWidget::updateControlsVisibility() {
+@@ -1098,14 +1098,7 @@ void TopBarWidget::updateControlsVisibility() {
  		&& !isOneColumn
  		&& _controller->canShowThirdSection()
  		&& !_chooseForReportReason);
@@ -1493,28 +1000,28 @@ index 808c26e5d..e57b933b8 100644
  		&& callsEnabled
  		&& !_chooseForReportReason);
 -- 
-2.40.1
+2.42.0
 
 
-From b92ac4154b643c11f1eb94eeba18f7e487a80aca Mon Sep 17 00:00:00 2001
+From f9bf9c9f403df65c58e1a01b14b78bd35d388f94 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 12/13] Disable MUTE/UNMUTE button
+Subject: [PATCH 12/14] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 5 +----
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index 053344c80..e95a353e5 100644
+index e4d082b4c..f29b269da 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -4534,10 +4534,7 @@ bool HistoryWidget::isChoosingTheme() const {
+@@ -4574,10 +4574,7 @@ bool HistoryWidget::isChoosingTheme() const {
  }
  
  bool HistoryWidget::isMuteUnmute() const {
 -	return _peer
--		&& ((_peer->isBroadcast() && !_peer->asChannel()->canPublish())
+-		&& ((_peer->isBroadcast() && !_peer->asChannel()->canPostMessages())
 -			|| (_peer->isGigagroup() && !Data::CanSendAnything(_peer))
 -			|| _peer->isRepliesChat());
 +	return false;
@@ -1522,23 +1029,23 @@ index 053344c80..e95a353e5 100644
  
  bool HistoryWidget::isSearching() const {
 -- 
-2.40.1
+2.42.0
 
 
-From 53454ee3579758d5b1b668a25aff4c93bcaeac39 Mon Sep 17 00:00:00 2001
+From 8eca70b24306552b964a8cd8fa68dcd03a79b575 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 28 May 2023 17:23:40 +0400
-Subject: [PATCH 13/13] Drop custom emoji
+Subject: [PATCH 13/14] Drop custom emoji
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index 4e7e3ebe7..f6d8b3a33 100644
+index 836ecda6c..993293270 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -294,12 +294,12 @@ HistoryItem::HistoryItem(
+@@ -320,12 +320,12 @@ HistoryItem::HistoryItem(
  		if (const auto media = data.vmedia()) {
  			setMedia(*media);
  		}
@@ -1554,5 +1061,52 @@ index 4e7e3ebe7..f6d8b3a33 100644
  		if (const auto groupedId = data.vgrouped_id()) {
  			setGroupId(
 -- 
-2.40.1
+2.42.0
+
+
+From e25e8c001520c8837b170d8b556f2a6029d02794 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Thu, 28 Sep 2023 09:28:21 +0400
+Subject: [PATCH 14/14] Disable stories
+
+---
+ Telegram/SourceFiles/dialogs/dialogs_widget.cpp           | 7 +------
+ Telegram/SourceFiles/info/profile/info_profile_widget.cpp | 4 ----
+ 2 files changed, 1 insertion(+), 10 deletions(-)
+
+diff --git a/Telegram/SourceFiles/dialogs/dialogs_widget.cpp b/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
+index 60dbe006e..16b6fe555 100644
+--- a/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
++++ b/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
+@@ -227,12 +227,7 @@ Widget::Widget(
+ 	object_ptr<Ui::IconButton>(this, st::dialogsLock))
+ , _scroll(this)
+ , _scrollToTop(_scroll, st::dialogsToUp)
+-, _stories((_layout != Layout::Child)
+-	? std::make_unique<Stories::List>(
+-		this,
+-		st::dialogsStoriesList,
+-		_storiesContents.events() | rpl::flatten_latest())
+-	: nullptr)
++, _stories(nullptr)
+ , _searchTimer([=] { searchMessages(); })
+ , _singleMessageSearch(&controller->session()) {
+ 	const auto makeChildListShown = [](PeerId peerId, float64 shown) {
+diff --git a/Telegram/SourceFiles/info/profile/info_profile_widget.cpp b/Telegram/SourceFiles/info/profile/info_profile_widget.cpp
+index d1209a246..4b7fa00bf 100644
+--- a/Telegram/SourceFiles/info/profile/info_profile_widget.cpp
++++ b/Telegram/SourceFiles/info/profile/info_profile_widget.cpp
+@@ -109,10 +109,6 @@ rpl::producer<QString> Widget::title() {
+ }
+ 
+ rpl::producer<Dialogs::Stories::Content> Widget::titleStories() {
+-	const auto peer = controller()->key().peer();
+-	if (peer && !peer->isChat()) {
+-		return Dialogs::Stories::LastForPeer(peer);
+-	}
+ 	return nullptr;
+ }
+ 
+-- 
+2.42.0
 
