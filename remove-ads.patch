@@ -1,7 +1,7 @@
 From e8fd8b97cb7b6bfea9501a0187cc3bdb886bb4bf Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 01/14] Update gitignore
+Subject: [PATCH 01/15] Update gitignore
 
 ---
  .gitignore | 3 +++
@@ -25,7 +25,7 @@ index 678ef32e3..af309cb7d 100644
 From fe9e94894dc6f18259f3c22fdce04fe169606235 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 02/14] Disable sponsored messages
+Subject: [PATCH 02/15] Disable sponsored messages
 
 ---
  Telegram/SourceFiles/data/data_sponsored_messages.cpp | 2 +-
@@ -51,7 +51,7 @@ index ea42a0fe2..c544eee26 100644
 From 0b8ff309e968442e8dcabf88051c5c0086b76440 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 03/14] Cannot react
+Subject: [PATCH 03/15] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 9 +--------
@@ -84,7 +84,7 @@ index c4c7e3546..ddcd9f4c7 100644
 From bce0ffd75a95bad6f959b54838f5bd49d1215423 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:52:19 +0400
-Subject: [PATCH 04/14] Always empty reaction list
+Subject: [PATCH 04/15] Always empty reaction list
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 2 +-
@@ -110,7 +110,7 @@ index ddcd9f4c7..de2357a3c 100644
 From 9cf6131e9b714c9b592d0ac3799c38c82553fd9d Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 05/14] Disable webpage preview on my messages
+Subject: [PATCH 05/15] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                            | 4 ++--
@@ -194,7 +194,7 @@ index cb1affa57..951476e4d 100644
 From 3efe72ef7065bd42ef76d5a6f3e0498e9e18a81f Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 06/14] Disable webpage previews on other users messages
+Subject: [PATCH 06/15] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 18 ++----------------
@@ -236,7 +236,7 @@ index de2357a3c..836ecda6c 100644
 From 7815587ad99024c9c6844ae8d4ec65f70f612020 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 07/14] Disable context menu item N Reacted
+Subject: [PATCH 07/15] Disable context menu item N Reacted
 
 ---
  Telegram/SourceFiles/history/history_inner_widget.cpp          | 3 +--
@@ -278,7 +278,7 @@ index 7bc9c5b57..64d226e9d 100644
 From 9add1bc5f8d0257f12f02d4f103c73a3c9952748 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 08/14] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 08/15] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -318,7 +318,7 @@ index d1e6f9ea2..6a5aec26e 100644
 From 8bd65668d911ec610c41e1c9c5aedd838d7581f9 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 09/14] Disable record button
+Subject: [PATCH 09/15] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp            | 7 +------
@@ -368,7 +368,7 @@ index 951476e4d..93f56757b 100644
 From 7badd917d4cb0e56725f48bd59a4b11a7462232b Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 10/14] Disable calls
+Subject: [PATCH 10/15] Disable calls
 
 ---
  .../history/view/history_view_top_bar_widget.cpp         | 9 +--------
@@ -401,7 +401,7 @@ index 577ebaff8..319711d43 100644
 From 640fd573159f82db1eaaa131b67af1fd659ac4dc Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 11/14] Disable MUTE/UNMUTE button
+Subject: [PATCH 11/15] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 5 +----
@@ -430,7 +430,7 @@ index e4d082b4c..f29b269da 100644
 From cb20f782d13ae273cc5774d4884c148997608006 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 28 May 2023 17:23:40 +0400
-Subject: [PATCH 12/14] Drop custom emoji
+Subject: [PATCH 12/15] Drop custom emoji
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 4 ++--
@@ -462,7 +462,7 @@ index 836ecda6c..993293270 100644
 From 10cc3aa6dc6abe8c76568ba7362a665f2ae69b8e Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 28 Sep 2023 09:28:21 +0400
-Subject: [PATCH 13/14] Disable stories
+Subject: [PATCH 13/15] Disable stories
 
 ---
  Telegram/SourceFiles/dialogs/dialogs_row.cpp              | 2 +-
@@ -523,7 +523,7 @@ index d1209a246..4b7fa00bf 100644
 From c24fd90e25303d1729c6bdc9ad66b747ebb22fbd Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 14:21:52 +0400
-Subject: [PATCH 14/14] Use sccache; use mold linker
+Subject: [PATCH 14/15] Use sccache; use mold linker
 
 ---
  CMakeLists.txt | 4 ++++
@@ -544,6 +544,35 @@ index 9b0a772fd..ba0568cbc 100644
  get_filename_component(third_party_loc "Telegram/ThirdParty" REALPATH)
  get_filename_component(submodules_loc "Telegram" REALPATH)
  get_filename_component(cmake_helpers_loc "cmake" REALPATH)
+-- 
+2.42.1
+
+
+From 1d75072c4f300bc8413e5a82e1ec751adb4475c4 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Wed, 8 Nov 2023 17:22:20 +0400
+Subject: [PATCH 15/15] Remove ability to copy monospace text via click
+
+---
+ Telegram/SourceFiles/core/ui_integration.cpp | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/Telegram/SourceFiles/core/ui_integration.cpp b/Telegram/SourceFiles/core/ui_integration.cpp
+index 8f1be8324..e2dc4778b 100644
+--- a/Telegram/SourceFiles/core/ui_integration.cpp
++++ b/Telegram/SourceFiles/core/ui_integration.cpp
+@@ -206,11 +206,6 @@ std::shared_ptr<ClickHandler> UiIntegration::createLinkHandler(
+ 			LOG(("Bad mention name: %1").arg(data.data));
+ 		}
+ 	} break;
+-
+-	case EntityType::Code:
+-		return std::make_shared<MonospaceClickHandler>(data.text, data.type);
+-	case EntityType::Pre:
+-		return std::make_shared<MonospaceClickHandler>(data.text, data.type);
+ 	}
+ 	return Integration::createLinkHandler(data, context);
+ }
 -- 
 2.42.1
 
