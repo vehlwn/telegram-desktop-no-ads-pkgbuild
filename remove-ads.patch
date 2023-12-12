@@ -1,7 +1,7 @@
 From 1a1c40520d30b0d29a2f5ddf6e55c0a0f1cf64ce Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 01/18] Update gitignore
+Subject: [PATCH 01/19] Update gitignore
 
 ---
  .gitignore | 3 +++
@@ -25,7 +25,7 @@ index 678ef32e3..af309cb7d 100644
 From 882be813612e9db3dc20366ae61fb9e42e0b77b3 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 02/18] Disable sponsored messages
+Subject: [PATCH 02/19] Disable sponsored messages
 
 ---
  Telegram/SourceFiles/data/data_sponsored_messages.cpp | 2 +-
@@ -51,7 +51,7 @@ index ea42a0fe2..c544eee26 100644
 From 157652423442c161bdf778662ba1bc0157702a77 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 03/18] Cannot react
+Subject: [PATCH 03/19] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 9 +--------
@@ -84,7 +84,7 @@ index c9391f3fa..3091b86d9 100644
 From cc18974b03339da5027c87ffa2fe040a6c961058 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:52:19 +0400
-Subject: [PATCH 04/18] Always empty reaction list
+Subject: [PATCH 04/19] Always empty reaction list
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 2 +-
@@ -110,7 +110,7 @@ index 3091b86d9..aa231774e 100644
 From 9c6d1035d1e084acaca03b5217b293ee5cc7f15d Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 05/18] Disable webpage preview on my messages
+Subject: [PATCH 05/19] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                             | 5 ++---
@@ -161,7 +161,7 @@ index ca5fb31c0..1eba23deb 100644
 From bdc55eb6c71a37aecf0fb9463a838f4127ea46ac Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 06/18] Disable webpage previews on other users messages
+Subject: [PATCH 06/19] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 30 ++-----------------
@@ -215,7 +215,7 @@ index aa231774e..d687ff6b0 100644
 From 641c458458979aee5c0c7c967e9a3ee72f5df913 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 07/18] Disable context menu item N Reacted
+Subject: [PATCH 07/19] Disable context menu item N Reacted
 
 ---
  Telegram/SourceFiles/history/history_inner_widget.cpp          | 3 +--
@@ -257,7 +257,7 @@ index 1775a3177..71f7e556d 100644
 From b3073be590903b33d44fd095f28bea1b50631763 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 08/18] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 08/19] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -297,7 +297,7 @@ index 07dcbb56c..a37fed5b6 100644
 From 8e6bffae283efd1be25d557cec7991c46ec3a644 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 09/18] Disable record button
+Subject: [PATCH 09/19] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp           | 8 +-------
@@ -348,7 +348,7 @@ index 8b9ac3393..c87b567b6 100644
 From e789482d3eaff3c6620cb1cf7f04f4b5a6ca9092 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 10/18] Disable calls
+Subject: [PATCH 10/19] Disable calls
 
 ---
  .../history/view/history_view_top_bar_widget.cpp     | 12 ++----------
@@ -384,7 +384,7 @@ index c026ab9c7..abd9d8692 100644
 From 48ca47a3a29a8052080362ed59d522d8cb9375f3 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 11/18] Disable MUTE/UNMUTE button
+Subject: [PATCH 11/19] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 5 +----
@@ -413,7 +413,7 @@ index 74c4ad9f4..e748b0f9a 100644
 From e611d9d84eb328460962d5cc709ec1dc432767b4 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 28 May 2023 17:23:40 +0400
-Subject: [PATCH 12/18] Drop custom emoji
+Subject: [PATCH 12/19] Drop custom emoji
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 4 ++--
@@ -445,7 +445,7 @@ index d687ff6b0..70e2df83a 100644
 From d67556743ba5386f7e8b1d1e52642cffb3a5f1d1 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 28 Sep 2023 09:28:21 +0400
-Subject: [PATCH 13/18] Disable stories
+Subject: [PATCH 13/19] Disable stories
 
 ---
  Telegram/SourceFiles/dialogs/dialogs_row.cpp              | 2 +-
@@ -506,7 +506,7 @@ index d1209a246..4b7fa00bf 100644
 From b04c12c5fae4f64ae0bc80f101b9870de730d7fd Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 21 Nov 2023 18:49:12 +0400
-Subject: [PATCH 14/18] Disable channel stories opening from chats list
+Subject: [PATCH 14/19] Disable channel stories opening from chats list
 
 ---
  Telegram/SourceFiles/dialogs/dialogs_widget.cpp | 2 +-
@@ -532,7 +532,7 @@ index 803951dd8..f8a1c06c0 100644
 From f8cbe4048fe7266a433ffcaff105600fbad6fca2 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 14:21:52 +0400
-Subject: [PATCH 15/18] Use sccache; use mold linker
+Subject: [PATCH 15/19] Use sccache; use mold linker
 
 ---
  CMakeLists.txt | 4 ++++
@@ -560,7 +560,7 @@ index 738d30544..26a7b9dc1 100644
 From 31ae882a1c9b1b79148ac71226d3aac1724bc913 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 17:22:20 +0400
-Subject: [PATCH 16/18] Remove ability to copy monospace text via click
+Subject: [PATCH 16/19] Remove ability to copy monospace text via click
 
 ---
  Telegram/SourceFiles/core/ui_integration.cpp | 5 -----
@@ -589,7 +589,7 @@ index ba2593e7b..42a963657 100644
 From f3f3886e53dbc7b284c5c30e2e753ec7643e1d58 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:23:06 +0400
-Subject: [PATCH 17/18] Disable background color on replies
+Subject: [PATCH 17/19] Disable background color on replies
 
 ---
  Telegram/SourceFiles/ui/chat/chat_style.h | 2 +-
@@ -615,7 +615,7 @@ index afa63a7ae..ba82f990c 100644
 From e01e05c761715540193f9a28c0cb6b943cb1a96c Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:56:39 +0400
-Subject: [PATCH 18/18] Disable background emoji on replies
+Subject: [PATCH 18/19] Disable background emoji on replies
 
 ---
  Telegram/SourceFiles/history/view/history_view_reply.cpp | 4 +---
@@ -636,6 +636,58 @@ index 10877d5c1..b8b08e6c6 100644
  	const auto backgroundEmojiCache = backgroundEmoji
  		? &backgroundEmoji->caches[Ui::BackgroundEmojiData::CacheIndex(
  			selected,
+-- 
+2.43.0
+
+
+From 84999979cfd9cfd11f72e11f8a1a8efefd428d9f Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Tue, 12 Dec 2023 14:28:34 +0400
+Subject: [PATCH 19/19] Allow copying text from restricted posts
+
+---
+ Telegram/SourceFiles/history/history_inner_widget.cpp     | 4 ++--
+ .../SourceFiles/media/view/media_view_overlay_widget.cpp  | 8 +-------
+ 2 files changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
+index a6ab18440..9291048c2 100644
+--- a/Telegram/SourceFiles/history/history_inner_widget.cpp
++++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
+@@ -2777,12 +2777,12 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+ }
+ 
+ bool HistoryInner::hasCopyRestriction(HistoryItem *item) const {
+-	return !_peer->allowsForwarding() || (item && item->forbidsForward());
++	return false;
+ }
+ 
+ bool HistoryInner::hasCopyMediaRestriction(
+ 		not_null<HistoryItem*> item) const {
+-	return hasCopyRestriction(item) || item->forbidsSaving();
++	return false;
+ }
+ 
+ bool HistoryInner::showCopyRestriction(HistoryItem *item) {
+diff --git a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
+index e51098feb..a2c2368ff 100644
+--- a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
++++ b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
+@@ -1043,13 +1043,7 @@ QSize OverlayWidget::flipSizeByRotation(QSize size) const {
+ }
+ 
+ bool OverlayWidget::hasCopyMediaRestriction(bool skipPremiumCheck) const {
+-	if (const auto story = _stories ? _stories->story() : nullptr) {
+-		return skipPremiumCheck
+-			? !story->canDownloadIfPremium()
+-			: !story->canDownloadChecked();
+-	}
+-	return (_history && !_history->peer->allowsForwarding())
+-		|| (_message && _message->forbidsSaving());
++	return false;
+ }
+ 
+ bool OverlayWidget::showCopyMediaRestriction(bool skipPRemiumCheck) {
 -- 
 2.43.0
 
