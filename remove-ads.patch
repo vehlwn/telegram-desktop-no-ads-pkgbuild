@@ -410,17 +410,34 @@ index 9c8326091..6d8e0c719 100644
 2.44.0
 
 
-From 6b0871b7171e75711ab977a85e880360e29f9d16 Mon Sep 17 00:00:00 2001
+From facc6c0e624220589a9449f1a22e73972e01aa05 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 28 Sep 2023 09:28:21 +0400
 Subject: [PATCH 12/17] Disable stories
 
 ---
+ Telegram/SourceFiles/data/data_peer.cpp                   | 5 -----
  Telegram/SourceFiles/dialogs/dialogs_row.cpp              | 2 +-
  Telegram/SourceFiles/dialogs/dialogs_widget.cpp           | 7 +------
  Telegram/SourceFiles/info/profile/info_profile_widget.cpp | 4 ----
- 3 files changed, 2 insertions(+), 11 deletions(-)
+ 4 files changed, 2 insertions(+), 16 deletions(-)
 
+diff --git a/Telegram/SourceFiles/data/data_peer.cpp b/Telegram/SourceFiles/data/data_peer.cpp
+index ab6396ac0..a28bc781c 100644
+--- a/Telegram/SourceFiles/data/data_peer.cpp
++++ b/Telegram/SourceFiles/data/data_peer.cpp
+@@ -1286,11 +1286,6 @@ const Data::WallPaper *PeerData::wallPaper() const {
+ }
+ 
+ bool PeerData::hasActiveStories() const {
+-	if (const auto user = asUser()) {
+-		return user->hasActiveStories();
+-	} else if (const auto channel = asChannel()) {
+-		return channel->hasActiveStories();
+-	}
+ 	return false;
+ }
+ 
 diff --git a/Telegram/SourceFiles/dialogs/dialogs_row.cpp b/Telegram/SourceFiles/dialogs/dialogs_row.cpp
 index 9ecddf88f..dfbfe7d16 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_row.cpp
@@ -471,7 +488,7 @@ index 48b0107ed..cd0bac66d 100644
 2.44.0
 
 
-From 1e74ffe4b476655aa5ba4593e52000e961607920 Mon Sep 17 00:00:00 2001
+From 9d8c7f2ed7960a0110ed922f7fbb9664eac309d3 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 14:21:52 +0400
 Subject: [PATCH 13/17] Use sccache; use mold linker
@@ -499,7 +516,7 @@ index abea2aaf4..cecde23a4 100644
 2.44.0
 
 
-From 0dac54096ec232dd456d3c2680db54f941b82673 Mon Sep 17 00:00:00 2001
+From 18bdb9533880b35a0031a2330e77dacf4a70a273 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 17:22:20 +0400
 Subject: [PATCH 14/17] Remove ability to copy monospace text via click
@@ -528,7 +545,7 @@ index e6b62203d..84a30d68a 100644
 2.44.0
 
 
-From 6a14bb13d5afa14e804d051fc285317f9341d00b Mon Sep 17 00:00:00 2001
+From 46cdba0878e2f0358a631f9a86c66bbf1d024bcc Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:23:06 +0400
 Subject: [PATCH 15/17] Disable background color on replies
@@ -554,7 +571,7 @@ index dca47f0f8..db175f7ee 100644
 2.44.0
 
 
-From f0d1d66454b5316f0ba1dd383c4729766efb1ec4 Mon Sep 17 00:00:00 2001
+From 29242f4c5d95a770729d147b5dfc0d746e80e761 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:56:39 +0400
 Subject: [PATCH 16/17] Disable background emoji on replies
@@ -582,7 +599,7 @@ index 5830bf0c5..1bb187b1b 100644
 2.44.0
 
 
-From b2d0a7b8371dfad84363047e8bf3c5b20b7caa30 Mon Sep 17 00:00:00 2001
+From e1a49008071e7709893e645934e4a7f2d1cce4f8 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 12 Dec 2023 14:28:34 +0400
 Subject: [PATCH 17/17] Allow copying text from restricted posts
