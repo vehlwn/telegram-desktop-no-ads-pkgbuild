@@ -1,6 +1,6 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=5.5.5
+pkgver=5.8.3
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
@@ -24,18 +24,15 @@ conflicts=("telegram-desktop")
 source=(
     "https://github.com/telegramdesktop/tdesktop/releases/download/v${pkgver}/tdesktop-${pkgver}-full.tar.gz"
     "remove-ads.patch"
-    "telegram-desktop-5_5_5-fix_build_with_cppgir.patch"
 )
 sha256sums=(
     "SKIP"
-    8766e5c8cad62dbedc37d007c4e93d81cd7ad1c8384bd8c0f15fb0adc25c8870
-    ee54bdf8fe67c8fadfffc794763fc62f4c6a15eb535c80ba7b1b74d6ec178882
+    8d5497f5472d0f1ae30ad678b5f434fcf9c2b5ba0ed1966c6fbefff847410ec7
 )
 
 prepare() {
     cd tdesktop-$pkgver-full
     patch --forward --strip=1 -i "${srcdir}/remove-ads.patch"
-    patch -Np1 -d "${srcdir}/tdesktop-$pkgver-full/cmake/external/glib/cppgir" -i "${srcdir}/telegram-desktop-5_5_5-fix_build_with_cppgir.patch"
 }
 
 build() {
