@@ -1,6 +1,6 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=5.11.1
+pkgver=5.12.3
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
@@ -14,7 +14,7 @@ makedepends=('cmake' 'git' 'ninja' 'python' 'range-v3' 'tl-expected' 'microsoft-
              'extra-cmake-modules' 'wayland-protocols' 'plasma-wayland-protocols' 'libtg_owt'
              'gobject-introspection' 'boost' 'fmt' 'mm-common' 'perl-xml-parser' 'python-packaging'
              'glib2-devel'
-         'mold')
+             'mold')
 optdepends=('webkit2gtk: embedded browser features'
             'xdg-desktop-portal: desktop integration')
 conflicts=("telegram-desktop")
@@ -27,7 +27,7 @@ source=(
 )
 sha256sums=(
     "SKIP"
-    022534b95bcac4f14d698870cb692cbc3ceb1599884906beb736d4d4a798bfaf
+    44601b713bdd32d109d972a8b50a2b4c91a2dc061fea220a4206a3cdcb238e0c
 )
 
 prepare() {
