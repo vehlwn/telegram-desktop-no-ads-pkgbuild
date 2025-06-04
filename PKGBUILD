@@ -1,7 +1,7 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
 pkgver=5.14.3
-pkgrel=1
+pkgrel=2
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
 url="https://desktop.telegram.org/"
@@ -45,6 +45,7 @@ makedepends=(
   'python'
   'range-v3'
   'tl-expected'
+  'mold'
 )
 optdepends=(
   'geoclue: geoinformation support'
