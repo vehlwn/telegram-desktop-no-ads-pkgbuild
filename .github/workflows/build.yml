@@ -17,6 +17,9 @@ jobs:
       - name: Number of processors
         run: nproc
 
+      - name: Free memory
+        run: free -h
+
       - name: Patch makepkg.conf
         run: |
           sed -Ei "s/^#(MAKEFLAGS=).*$/\\1\"-j$(nproc)\"/" /etc/makepkg.conf
