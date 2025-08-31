@@ -17,6 +17,11 @@ jobs:
       - name: Number of processors
         run: nproc
 
+      - name: Patch makepkg.conf
+        run: |
+          sed -Ei "s/^#(MAKEFLAGS=).*$/\\1\"-j$(nproc)\"/" /etc/makepkg.conf
+          grep "^MAKEFLAGS" /etc/makepkg.conf
+
       - name: Create non root user
         run: |
           useradd builder
