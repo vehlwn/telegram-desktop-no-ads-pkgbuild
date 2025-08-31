@@ -1,6 +1,6 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=5.15.4
+pkgver=6.0.3
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
@@ -59,7 +59,7 @@ optdepends=(
   'xdg-desktop-portal: desktop integration'
 )
 conflicts=("telegram-desktop")
-_td_commit=51743dfd01dff6179e2d8f7095729caa4e2222e9
+_td_commit=6d74326c5ce53aeb52496f157f0080d9b8515970
 # Patches are from feature/remove-ads branch:
 # https://github.com/vehlwn/tdesktop/tree/feature/remove-ads
 # git format-patch upstream/dev..feature/remove-ads --stdout > remove-ads.patch
@@ -70,7 +70,7 @@ source=(
 )
 sha256sums=(
     "SKIP"
-    029c6e0d5fdef08fb9085fb65489e3226c9580e9a9157fd6a3627f84faa69142
+    38ce2ef437341e6177188d979cbf4403d9f563c2e81e185306cd09e0e5832585
     "SKIP"
 )
 
