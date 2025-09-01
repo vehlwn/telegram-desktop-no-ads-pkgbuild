@@ -1,7 +1,7 @@
 From d3ec4b9723dd8c622e07d9ef6e0e6889f44c6be3 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 01/16] Update gitignore
+Subject: [PATCH 01/17] Update gitignore
 
 ---
  .gitignore | 1 +
@@ -23,7 +23,7 @@ index f4fe857af0..79552c6cd6 100644
 From 94b9bf34c817afd7046819343cd26e44d923f520 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 02/16] Disable sponsored messages
+Subject: [PATCH 02/17] Disable sponsored messages
 
 ---
  Telegram/SourceFiles/data/components/sponsored_messages.cpp | 5 -----
@@ -49,10 +49,37 @@ index b907f1df65..00ff9700e9 100644
 2.51.0
 
 
-From e547ee6280aee3a43938e45ece48bcbd8c9ace21 Mon Sep 17 00:00:00 2001
+From 1b6a383a6f0c9d55d33dbe9b8e5de656d29764e6 Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Mon, 1 Sep 2025 10:27:46 +0400
+Subject: [PATCH 03/17] Disable sponsored ads on videos
+
+---
+ Telegram/SourceFiles/data/components/sponsored_messages.cpp | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Telegram/SourceFiles/data/components/sponsored_messages.cpp b/Telegram/SourceFiles/data/components/sponsored_messages.cpp
+index 00ff9700e9..4aac1f536d 100644
+--- a/Telegram/SourceFiles/data/components/sponsored_messages.cpp
++++ b/Telegram/SourceFiles/data/components/sponsored_messages.cpp
+@@ -235,8 +235,7 @@ bool SponsoredMessages::canHaveFor(not_null<History*> history) const {
+ }
+ 
+ bool SponsoredMessages::canHaveFor(not_null<HistoryItem*> item) const {
+-	return item->history()->peer->isBroadcast()
+-		&& item->isRegular();
++	return false;
+ }
+ 
+ bool SponsoredMessages::isTopBarFor(not_null<History*> history) const {
+-- 
+2.51.0
+
+
+From daeecde4cdaa5052ee5d2beff20e42e7552db1c5 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 03/16] Cannot react
+Subject: [PATCH 04/17] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 13 +++----------
@@ -100,10 +127,10 @@ index 788456e7da..a7ab40bd6b 100644
 2.51.0
 
 
-From 355edd20508ce0c1b1fe2974ae71a381e349a1e5 Mon Sep 17 00:00:00 2001
+From 11ff1f21bf7df48ed7d8fffa41bd6960b5e8c267 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 04/16] Disable webpage preview on my messages
+Subject: [PATCH 05/17] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                             | 5 ++---
@@ -151,10 +178,10 @@ index 379ffb92ea..dc0fb6e730 100644
 2.51.0
 
 
-From 53cf65ed8897ee90a43f04afc68d1c1cae6a02e5 Mon Sep 17 00:00:00 2001
+From 6aa486dc1ca395dd40be48091ef46e9c4c2658b8 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 05/16] Disable webpage previews on other users messages
+Subject: [PATCH 06/17] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 30 ++-----------------
@@ -205,10 +232,10 @@ index a7ab40bd6b..8945e8060c 100644
 2.51.0
 
 
-From 948be34198083cea558770ea767b3c0753bc6672 Mon Sep 17 00:00:00 2001
+From 94c637a4410ed871f6add7c76335034a58ecdeb5 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 06/16] Disable context menu item N Reacted
+Subject: [PATCH 07/17] Disable context menu item N Reacted
 
 ---
  Telegram/SourceFiles/history/history_inner_widget.cpp          | 3 +--
@@ -247,10 +274,10 @@ index 53017e65de..a7907be1d1 100644
 2.51.0
 
 
-From 28d7818d8e5a51eb04db2902aa8e26b957ca539b Mon Sep 17 00:00:00 2001
+From 50fc29dd6040a247d562f673ed9376ba64dbb367 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 07/16] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 08/17] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -287,10 +314,10 @@ index a0cdec1702..c5888d7cba 100644
 2.51.0
 
 
-From 742fdba2a9a4ef67cef8e33311ce5d7c036a959f Mon Sep 17 00:00:00 2001
+From 0d595f5158ac9064609394d09e5f6f0d9071d5b1 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 08/16] Disable record button
+Subject: [PATCH 09/17] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp           | 8 +-------
@@ -338,10 +365,10 @@ index 6caddd9ba6..4db75b7edd 100644
 2.51.0
 
 
-From f824213ef63229105dc1433262ef7981ab9f39dc Mon Sep 17 00:00:00 2001
+From e0dc59d8e33196185e43f4d4a41da4cdbf83fab2 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 09/16] Disable calls
+Subject: [PATCH 10/17] Disable calls
 
 ---
  .../view/history_view_top_bar_widget.cpp      | 25 +++----------------
@@ -390,10 +417,10 @@ index 9ff972022d..e0f2b0681a 100644
 2.51.0
 
 
-From d5211058da145e99f7c82e3e1fe5c5825744f77f Mon Sep 17 00:00:00 2001
+From ddfc7380a7445316f47be1cfb4789c90adcefdfc Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 10/16] Disable MUTE/UNMUTE button
+Subject: [PATCH 11/17] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 6 +-----
@@ -420,10 +447,10 @@ index 858fad26fe..357fe4dfb2 100644
 2.51.0
 
 
-From 23bd91057db57020302f6ff3808a4bc23710ecf0 Mon Sep 17 00:00:00 2001
+From d70de5c5376f70033551df80b3684998243a15b3 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 28 Sep 2023 09:28:21 +0400
-Subject: [PATCH 11/16] Disable stories
+Subject: [PATCH 12/17] Disable stories
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp                   | 5 -----
@@ -498,10 +525,10 @@ index a11face226..d63c688021 100644
 2.51.0
 
 
-From 7f014f6bb444d5aff308a2c997702197a9884b3c Mon Sep 17 00:00:00 2001
+From 37ca7ff1a5b2f6e003a3eadd4fb8f599b2d65877 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 17:22:20 +0400
-Subject: [PATCH 12/16] Remove ability to copy monospace text via click
+Subject: [PATCH 13/17] Remove ability to copy monospace text via click
 
 ---
  Telegram/SourceFiles/core/ui_integration.cpp | 4 ----
@@ -526,10 +553,10 @@ index c918904384..f2da91b11e 100644
 2.51.0
 
 
-From 2f436b3b27f33ddbd5b699e620d1fd9bf57996f6 Mon Sep 17 00:00:00 2001
+From cb5d60f815abece1b6fcc08cc9a55064fbd30c31 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:23:06 +0400
-Subject: [PATCH 13/16] Disable background color on replies
+Subject: [PATCH 14/17] Disable background color on replies
 
 ---
  Telegram/SourceFiles/ui/chat/chat_style.h | 2 +-
@@ -552,10 +579,10 @@ index 8ddf1901bc..7bd8b5a042 100644
 2.51.0
 
 
-From e0453e5f0e295c0fb462808dab3cbaaa8b449d32 Mon Sep 17 00:00:00 2001
+From 3eaa295dd0702fccd0897c43cf73b0ed329cc0c0 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:56:39 +0400
-Subject: [PATCH 14/16] Disable background emoji on replies
+Subject: [PATCH 15/17] Disable background emoji on replies
 
 ---
  Telegram/SourceFiles/history/view/history_view_reply.cpp | 4 +---
@@ -580,10 +607,10 @@ index fc18f3dcdf..a9b4395f27 100644
 2.51.0
 
 
-From 084351059a3db21186e1100c140df1cb783419b1 Mon Sep 17 00:00:00 2001
+From e571bf30f1d340e19b2644856586ec98d3e750ce Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 12 Dec 2023 14:28:34 +0400
-Subject: [PATCH 15/16] Allow copying text from restricted posts
+Subject: [PATCH 16/17] Allow copying text from restricted posts
 
 ---
  .../history/history_inner_widget.cpp          |  4 ++--
@@ -677,10 +704,10 @@ index 5ff6a060a3..cb40b0eaaa 100644
 2.51.0
 
 
-From a3fa9169e344a6cd5d9ef5f1ea10a758815aed08 Mon Sep 17 00:00:00 2001
+From 1468c01324ab600402b41335054c3c692414b504 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 4 Jun 2025 10:13:25 +0400
-Subject: [PATCH 16/16] Remove top bar suggestions with premium ads and
+Subject: [PATCH 17/17] Remove top bar suggestions with premium ads and
  birthdays
 
 ---

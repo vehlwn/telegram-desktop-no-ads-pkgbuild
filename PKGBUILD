@@ -1,7 +1,7 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
 pkgver=6.0.3
-pkgrel=1
+pkgrel=2
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
 url="https://desktop.telegram.org/"
@@ -70,7 +70,7 @@ source=(
 )
 sha256sums=(
     "SKIP"
-    38ce2ef437341e6177188d979cbf4403d9f563c2e81e185306cd09e0e5832585
+    907f17a79bd6ff9ebe6d2ee465056974ba088839767188c11d7816f865ad9d72
     "SKIP"
 )
 
