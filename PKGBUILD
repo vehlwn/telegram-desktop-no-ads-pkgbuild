@@ -1,7 +1,7 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=6.0.3
-pkgrel=2
+pkgver=6.1.3
+pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
 url="https://desktop.telegram.org/"
@@ -66,17 +66,22 @@ _td_commit=6d74326c5ce53aeb52496f157f0080d9b8515970
 source=(
     "https://github.com/telegramdesktop/tdesktop/releases/download/v${pkgver}/tdesktop-${pkgver}-full.tar.gz"
     "remove-ads.patch"
+    glib2.86.patch
     "git+https://github.com/tdlib/td.git#tag=${_td_commit}"
 )
 sha256sums=(
     "SKIP"
-    907f17a79bd6ff9ebe6d2ee465056974ba088839767188c11d7816f865ad9d72
+    17555b6d1e8a0c5ce958f912d2c96ef8fbe658614d571ad9131a86e9d216b46f
+    57b855e701ed29da039431b2688082e6885c368e20dd38bbedffe1633e5efeda
     "SKIP"
 )
 
 prepare() {
     cd tdesktop-$pkgver-full
     patch --forward --strip=1 -i "${srcdir}/remove-ads.patch"
+
+    # Fix build with glib2 2.86
+    patch --forward --strip=1 -i "${srcdir}/glib2.86.patch"
 }
 
 build() {
