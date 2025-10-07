@@ -1,6 +1,6 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=6.1.3
+pkgver=6.1.4
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
@@ -49,15 +49,6 @@ makedepends=(
   'range-v3'
   'tl-expected'
 )
-optdepends=(
-  'geoclue: geoinformation support'
-  'geocode-glib-2: geocoding support'
-  'geocode-glib: geocoding support'
-  'webkit2gtk-4.1: embedded browser features provided by webkit2gtk-4.1'
-  'webkit2gtk: embedded browser features provided by webkit2gtk'
-  'webkitgtk-6.0: embedded browser features provided by webkitgtk-6.0 (Wayland only)'
-  'xdg-desktop-portal: desktop integration'
-)
 conflicts=("telegram-desktop")
 _td_commit=6d74326c5ce53aeb52496f157f0080d9b8515970
 # Patches are from feature/remove-ads branch:
@@ -65,23 +56,18 @@ _td_commit=6d74326c5ce53aeb52496f157f0080d9b8515970
 # git format-patch upstream/dev..feature/remove-ads --stdout > remove-ads.patch
 source=(
     "https://github.com/telegramdesktop/tdesktop/releases/download/v${pkgver}/tdesktop-${pkgver}-full.tar.gz"
-    "remove-ads.patch"
-    glib2.86.patch
     "git+https://github.com/tdlib/td.git#tag=${_td_commit}"
+    "remove-ads.patch"
 )
 sha256sums=(
     "SKIP"
-    17555b6d1e8a0c5ce958f912d2c96ef8fbe658614d571ad9131a86e9d216b46f
-    57b855e701ed29da039431b2688082e6885c368e20dd38bbedffe1633e5efeda
     "SKIP"
+    1df395807da528119b744a277fa6e20775ddbcf4fa8e59d0d7131679ecdddfde
 )
 
 prepare() {
     cd tdesktop-$pkgver-full
     patch --forward --strip=1 -i "${srcdir}/remove-ads.patch"
-
-    # Fix build with glib2 2.86
-    patch --forward --strip=1 -i "${srcdir}/glib2.86.patch"
 }
 
 build() {
