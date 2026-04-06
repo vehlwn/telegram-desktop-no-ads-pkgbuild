@@ -1,7 +1,7 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=6.6.4
-_td_commit=0ae923c493bceb75433de2682ba8ae29cc7bf88d
+pkgver=6.7.2
+_td_commit=51743dfd01dff6179e2d8f7095729caa4e2222e9
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
 arch=('x86_64')
@@ -12,23 +12,22 @@ depends=(
   'ada'
   'ffmpeg'
   'glib2'
+  'glibc'
   'hicolor-icon-theme'
   'hunspell'
   'kcoreaddons'
   'libavif'
   'libdispatch'
+  'libgcc'
   'libheif'
   'libjxl'
+  'libstdc++'
   'libxcomposite'
   'libxdamage'
   'libxrandr'
   'libxtst'
   'lz4'
   'minizip'
-  'zlib'
-  'libstdc++'
-  'glibc'
-  'libgcc'
   'openal'
   'openh264'
   'openssl'
@@ -39,9 +38,11 @@ depends=(
   'qt6-wayland'
   'rnnoise'
   'xxhash'
+  'zlib'
 )
 makedepends=(
   'boost'
+  'boost-libs'
   'cmake'
   'git'
   'glib2-devel'
@@ -54,7 +55,6 @@ makedepends=(
   'range-v3'
   'tl-expected'
 )
-
 conflicts=("telegram-desktop")
 # Patches are from feature/remove-ads branch:
 # https://github.com/vehlwn/tdesktop/tree/feature/remove-ads
@@ -69,7 +69,7 @@ sha256sums=(
     "SKIP"
     "SKIP"
     f94abffdf1c302ad1081e6278516ec38f0fd89b9672271f4d44885b3f09ac886
-    92b22aea5a7ac650a980828b99659f79160c038408edb1705de8731a0d4dbd02
+    292e1da4ca82b822c248d8be6aa0d362cdeedf2a4d0f46a642bb6b3bc81c2a62
 )
 
 prepare() {
