@@ -1,7 +1,7 @@
 From 91993e7d98e936b8a178ba3efaeb09de80ef0ff0 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 01/17] Update gitignore
+Subject: [PATCH 01/18] Update gitignore
 
 ---
  .gitignore | 2 ++
@@ -24,7 +24,7 @@ index 8547c2aa0b..81349c3c8c 100644
 From 4340ef78492e7c19feb62b4331c8a8e52d790059 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
-Subject: [PATCH 02/17] Disable sponsored messages
+Subject: [PATCH 02/18] Disable sponsored messages
 
 ---
  Telegram/SourceFiles/data/components/sponsored_messages.cpp | 5 -----
@@ -53,7 +53,7 @@ index 4e68421fff..8fbdcb6702 100644
 From ca427b274e4d7a85b413bd96445aecf207d0f6b3 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 1 Sep 2025 10:27:46 +0400
-Subject: [PATCH 03/17] Disable sponsored ads on videos
+Subject: [PATCH 03/18] Disable sponsored ads on videos
 
 ---
  Telegram/SourceFiles/data/components/sponsored_messages.cpp | 3 +--
@@ -80,7 +80,7 @@ index 8fbdcb6702..d94a0d27d5 100644
 From ecdd6cba9d9e9205bdb162c8dddcef88968fb5fd Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
-Subject: [PATCH 04/17] Cannot react
+Subject: [PATCH 04/18] Cannot react
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 13 +++----------
@@ -131,7 +131,7 @@ index 5777ba7b68..3b54b77cd7 100644
 From 0120ffbfdf247f41d8d719bd870ae66e0c0b79ec Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
-Subject: [PATCH 05/17] Disable webpage preview on my messages
+Subject: [PATCH 05/18] Disable webpage preview on my messages
 
 ---
  Telegram/SourceFiles/apiwrap.cpp                             | 5 ++---
@@ -182,7 +182,7 @@ index feb0a5edf8..818f4a4696 100644
 From c121132fa18b15c52c94ad204c2f7b9619e331d4 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
-Subject: [PATCH 06/17] Disable webpage previews on other users messages
+Subject: [PATCH 06/18] Disable webpage previews on other users messages
 
 ---
  Telegram/SourceFiles/history/history_item.cpp | 30 ++-----------------
@@ -236,7 +236,7 @@ index 3b54b77cd7..5656ca2db0 100644
 From 05c42d77a6a6c56354583dfd2e0e677204dc31ef Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
-Subject: [PATCH 07/17] Disable context menu item N Reacted
+Subject: [PATCH 07/18] Disable context menu item N Reacted
 
 ---
  Telegram/SourceFiles/history/history_inner_widget.cpp          | 3 +--
@@ -278,7 +278,7 @@ index 543d7c6281..b05b203d15 100644
 From 2b570de17a9eaaa805f4d7d5dce3ac6c47dce758 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
-Subject: [PATCH 08/17] Cannot pin messages; disabled PinnedBar
+Subject: [PATCH 08/18] Cannot pin messages; disabled PinnedBar
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp         | 2 +-
@@ -318,7 +318,7 @@ index 31be1ad830..15d979270a 100644
 From bee022e03ba1ed9802a6a6f0304b71ef245b19eb Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
-Subject: [PATCH 09/17] Disable record button
+Subject: [PATCH 09/18] Disable record button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp           | 8 +-------
@@ -370,7 +370,7 @@ index dc997eaa6d..39e4fb618a 100644
 From 3d3bc851aca6c22a56fd2f16d2e1184c2579ca3e Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
-Subject: [PATCH 10/17] Disable calls
+Subject: [PATCH 10/18] Disable calls
 
 ---
  .../view/history_view_top_bar_widget.cpp      | 25 +++----------------
@@ -422,7 +422,7 @@ index 7e92eeeb6e..1d819d74e1 100644
 From c4fcb486b0ee8d9686d09c14c581753a924c6ddd Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
-Subject: [PATCH 11/17] Disable MUTE/UNMUTE button
+Subject: [PATCH 11/18] Disable MUTE/UNMUTE button
 
 ---
  Telegram/SourceFiles/history/history_widget.cpp | 6 +-----
@@ -452,7 +452,7 @@ index 913d79b92f..be9dfa7acf 100644
 From 08be6eaee16318ad0a1ba4e7111eeae25e270969 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 28 Sep 2023 09:28:21 +0400
-Subject: [PATCH 12/17] Disable stories
+Subject: [PATCH 12/18] Disable stories
 
 ---
  Telegram/SourceFiles/data/data_peer.cpp                   | 5 -----
@@ -530,7 +530,7 @@ index d9d24bed01..a44c04e696 100644
 From bfa3a1754da999d49865bd551dd37d67d5a6053a Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 17:22:20 +0400
-Subject: [PATCH 13/17] Remove ability to copy monospace text via click
+Subject: [PATCH 13/18] Remove ability to copy monospace text via click
 
 ---
  Telegram/SourceFiles/core/ui_integration.cpp | 4 ----
@@ -558,7 +558,7 @@ index 907ff27a1b..4709d0c91e 100644
 From e4f5724117d5c34a7eb81600270e7ac231a4e199 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:23:06 +0400
-Subject: [PATCH 14/17] Disable background color on replies
+Subject: [PATCH 14/18] Disable background color on replies
 
 ---
  Telegram/SourceFiles/ui/chat/chat_style.h | 2 +-
@@ -584,7 +584,7 @@ index 03b5fc9f00..7752ff62a6 100644
 From cc0c5a470e4a43ec75484b0e91cfb4a8345adf5e Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:56:39 +0400
-Subject: [PATCH 15/17] Disable background emoji on replies
+Subject: [PATCH 15/18] Disable background emoji on replies
 
 ---
  Telegram/SourceFiles/history/view/history_view_reply.cpp | 4 +---
@@ -612,7 +612,7 @@ index 859b6147ba..916da01c01 100644
 From b92656967f0160632f3fed12f053a42f62814744 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 12 Dec 2023 14:28:34 +0400
-Subject: [PATCH 16/17] Allow copying text from restricted posts
+Subject: [PATCH 16/18] Allow copying text from restricted posts
 
 ---
  .../history/history_inner_widget.cpp          |  4 +--
@@ -716,7 +716,7 @@ index c8f073f6e1..e337e2395e 100644
 From 4176ffa16dc2d24f5acc4013be4e3fe179e69dbd Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 4 Jun 2025 10:13:25 +0400
-Subject: [PATCH 17/17] Remove top bar suggestions with premium ads and
+Subject: [PATCH 17/18] Remove top bar suggestions with premium ads and
  birthdays
 
 ---
@@ -735,6 +735,45 @@ index 83dadb4e98..9465a3f5bd 100644
  }
  
  void Widget::setupSwipeBack() {
+-- 
+2.53.0
+
+
+From 78a2c48a376a494ded3bd8ccdb15d6f8bf4a372f Mon Sep 17 00:00:00 2001
+From: vehlwn <36479428+vehlwn@users.noreply.github.com>
+Date: Mon, 6 Apr 2026 17:45:35 +0400
+Subject: [PATCH 18/18] Remove ai button
+
+---
+ Telegram/SourceFiles/history/history_widget.cpp | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
+index be9dfa7acf..758b666a9b 100644
+--- a/Telegram/SourceFiles/history/history_widget.cpp
++++ b/Telegram/SourceFiles/history/history_widget.cpp
+@@ -6238,20 +6238,7 @@ bool HistoryWidget::fieldOrDisabledShown() const {
+ }
+ 
+ bool HistoryWidget::hasEnoughLinesForAi() const {
+-	if (!_history
+-		|| _voiceRecordBar->isActive()
+-		|| session().appConfig().aiComposeStyles().empty()) {
+-		return false;
+-	}
+-	const auto &style = _field->st().style;
+-	const auto lineHeight = style.lineHeight
+-		? style.lineHeight
+-		: style.font->height;
+-	const auto margins = _field->fullTextMargins();
+-	const auto contentHeight = _field->height()
+-		- margins.top()
+-		- margins.bottom();
+-	return contentHeight >= (3 * lineHeight);
++    return false;
+ }
+ 
+ void HistoryWidget::updateAiButtonVisibility() {
 -- 
 2.53.0
 
