@@ -1,6 +1,6 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=6.7.8
+pkgver=6.9.3
 _td_commit=51743dfd01dff6179e2d8f7095729caa4e2222e9
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads'
@@ -20,10 +20,16 @@ depends=(
   'libdispatch'
   'libgcc'
   'libheif'
+  'libjpeg-turbo'
   'libjxl'
+  'libpipewire'
   'libstdc++'
+  'libxcb'
   'libxcomposite'
   'libxdamage'
+  'libxext'
+  'libxfixes'
+  'libxkbcommon'
   'libxrandr'
   'libxtst'
   'lz4'
@@ -33,6 +39,7 @@ depends=(
   'openssl'
   'pipewire'
   'protobuf'
+  'qt6-base'
   'qt6-imageformats'
   'qt6-svg'
   'qt6-wayland'
@@ -47,6 +54,7 @@ makedepends=(
   'git'
   'glib2-devel'
   'gobject-introspection'
+  'qt6-shadertools'
   'gperf'
   'libtg_owt'
   'microsoft-gsl'
@@ -62,20 +70,20 @@ conflicts=("telegram-desktop")
 source=(
     "https://github.com/telegramdesktop/tdesktop/releases/download/v${pkgver}/tdesktop-${pkgver}-full.tar.gz"
     "git+https://github.com/tdlib/td.git#tag=${_td_commit}"
-    tdesktop-fix-minizip-includes.patch
     "remove-ads.patch"
+    "2ed2083b5509d848980379fb6ee7584a978d70e3.patch"
 )
 sha256sums=(
     "SKIP"
     "SKIP"
-    f94abffdf1c302ad1081e6278516ec38f0fd89b9672271f4d44885b3f09ac886
-    5e1a6532e356c57c2d6d45c05768aa32e0d2fe35d6ff8bc02f1fe6c8a0846cb2
+    fc796ca66e5937d97d024d45fe6a11dfef3b7ac99aa5bfacfa963cd9f19c2ca1
+    01a7e657a407bff2e7e871c0dc4c8023743b0a54ddb86e33bfae356b9d834041
 )
 
 prepare() {
     cd tdesktop-$pkgver-full
     patch --forward --strip=1 -i "${srcdir}/remove-ads.patch"
-    patch -Np1 -d Telegram/lib_base -i "$srcdir"/tdesktop-fix-minizip-includes.patch
+    patch --forward --strip=1 -i "${srcdir}/2ed2083b5509d848980379fb6ee7584a978d70e3.patch"
 }
 
 build() {
