@@ -1,4 +1,4 @@
-From 4e442a737d1529688b4e52277d34d27e24d38688 Mon Sep 17 00:00:00 2001
+From 4be5a12ae509de8bb1ec998f6ca67c3c08c3273c Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
 Subject: [PATCH 01/18] Update gitignore
@@ -8,20 +8,20 @@ Subject: [PATCH 01/18] Update gitignore
  1 file changed, 2 insertions(+)
 
 diff --git a/.gitignore b/.gitignore
-index 4da55962c4..8e16e56f24 100644
+index 739b6d3703..5c1f869c15 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -71,3 +71,5 @@ settings.local.json
+@@ -72,3 +72,5 @@ settings.local.json
  
  # Generated changelog page (built by CI, deployed to GitHub Pages)
  /docs/changelog/
 +
 +build/
 -- 
-2.54.0
+2.55.0
 
 
-From add3e1c125fbe4740bf6f6575732e51d575cb93b Mon Sep 17 00:00:00 2001
+From 05a99b410ed64484452eabc89e5bdbe1eca30d74 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 22 Jun 2022 16:57:44 +0400
 Subject: [PATCH 02/18] Disable sponsored messages
@@ -31,7 +31,7 @@ Subject: [PATCH 02/18] Disable sponsored messages
  1 file changed, 5 deletions(-)
 
 diff --git a/Telegram/SourceFiles/data/components/sponsored_messages.cpp b/Telegram/SourceFiles/data/components/sponsored_messages.cpp
-index 4e68421fff..8fbdcb6702 100644
+index 40c00c4bb4..6722bc6f12 100644
 --- a/Telegram/SourceFiles/data/components/sponsored_messages.cpp
 +++ b/Telegram/SourceFiles/data/components/sponsored_messages.cpp
 @@ -239,11 +239,6 @@ void SponsoredMessages::inject(
@@ -47,10 +47,10 @@ index 4e68421fff..8fbdcb6702 100644
  }
  
 -- 
-2.54.0
+2.55.0
 
 
-From 661b68bf9e54a37d9563aead31f982121698ffc0 Mon Sep 17 00:00:00 2001
+From 6f0cf07d82cb9c46bc9c9fdba1a56a05e11c3444 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 1 Sep 2025 10:27:46 +0400
 Subject: [PATCH 03/18] Disable sponsored ads on videos
@@ -60,7 +60,7 @@ Subject: [PATCH 03/18] Disable sponsored ads on videos
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/Telegram/SourceFiles/data/components/sponsored_messages.cpp b/Telegram/SourceFiles/data/components/sponsored_messages.cpp
-index 8fbdcb6702..d94a0d27d5 100644
+index 6722bc6f12..188d6d9bba 100644
 --- a/Telegram/SourceFiles/data/components/sponsored_messages.cpp
 +++ b/Telegram/SourceFiles/data/components/sponsored_messages.cpp
 @@ -243,8 +243,7 @@ bool SponsoredMessages::canHaveFor(not_null<History*> history) const {
@@ -74,10 +74,10 @@ index 8fbdcb6702..d94a0d27d5 100644
  
  bool SponsoredMessages::isTopBarFor(not_null<History*> history) const {
 -- 
-2.54.0
+2.55.0
 
 
-From da623baea1570034922628641448f45ebe3b0819 Mon Sep 17 00:00:00 2001
+From ba24d6c4f1ec2e441f163fa0a97b6ab15bf8b470 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Fri, 19 May 2023 17:51:54 +0400
 Subject: [PATCH 04/18] Cannot react
@@ -87,10 +87,10 @@ Subject: [PATCH 04/18] Cannot react
  1 file changed, 3 insertions(+), 13 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index 1dd1fa68b4..221bde80b4 100644
+index 60de97342c..5d48e5c060 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -3311,19 +3311,7 @@ void HistoryItem::translationDone(LanguageId to, TextWithEntities result) {
+@@ -3348,19 +3348,7 @@ void HistoryItem::translationDone(
  }
  
  bool HistoryItem::canReact() const {
@@ -111,7 +111,7 @@ index 1dd1fa68b4..221bde80b4 100644
  }
  
  void HistoryItem::addPaidReaction(
-@@ -4952,6 +4940,7 @@ void HistoryItem::createComponentsHelper(HistoryItemCommonFields &&fields) {
+@@ -5016,6 +5004,7 @@ void HistoryItem::createComponentsHelper(HistoryItemCommonFields &&fields) {
  }
  
  void HistoryItem::setReactions(const MTPMessageReactions *reactions) {
@@ -119,7 +119,7 @@ index 1dd1fa68b4..221bde80b4 100644
  	Expects(!_reactions);
  
  	if (changeReactions(reactions) && _reactions->hasUnread()) {
-@@ -4960,6 +4949,7 @@ void HistoryItem::setReactions(const MTPMessageReactions *reactions) {
+@@ -5024,6 +5013,7 @@ void HistoryItem::setReactions(const MTPMessageReactions *reactions) {
  }
  
  void HistoryItem::updateReactions(const MTPMessageReactions *reactions) {
@@ -128,10 +128,10 @@ index 1dd1fa68b4..221bde80b4 100644
  	const auto hadUnread = hasUnreadReaction();
  	const auto changed = changeReactions(reactions);
 -- 
-2.54.0
+2.55.0
 
 
-From 5b499f456a0356eaad6ecd4bb09e40af239b9f4a Mon Sep 17 00:00:00 2001
+From 23427781e78bcbb8ae090fd8a11d479067a6be61 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 16:29:10 +0400
 Subject: [PATCH 05/18] Disable webpage preview on my messages
@@ -142,19 +142,19 @@ Subject: [PATCH 05/18] Disable webpage preview on my messages
  2 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/Telegram/SourceFiles/apiwrap.cpp b/Telegram/SourceFiles/apiwrap.cpp
-index 528577e93b..4410a5cba7 100644
+index ca6e01670a..b9ad6ef215 100644
 --- a/Telegram/SourceFiles/apiwrap.cpp
 +++ b/Telegram/SourceFiles/apiwrap.cpp
-@@ -2270,7 +2270,7 @@ void ApiWrap::saveDraftsToCloud() {
+@@ -2368,7 +2368,7 @@ mtpRequestId ApiWrap::savePreparedDraftToCloud(
  
- 		auto flags = MTPmessages_SaveDraft::Flags(0);
- 		auto &textWithTags = cloudDraft->textWithTags;
--		if (cloudDraft->webpage.removed) {
-+		if (true) {
- 			flags |= MTPmessages_SaveDraft::Flag::f_no_webpage;
- 		} else if (!cloudDraft->webpage.url.isEmpty()) {
- 			flags |= MTPmessages_SaveDraft::Flag::f_media;
-@@ -4273,8 +4273,7 @@ void ApiWrap::sendMessage(
+ 	auto flags = MTPmessages_SaveDraft::Flags(0);
+ 	const auto &textWithTags = draft.textWithTags;
+-	if (draft.webpage.removed) {
++	if (true) {
+ 		flags |= MTPmessages_SaveDraft::Flag::f_no_webpage;
+ 	} else if (!draft.webpage.url.isEmpty()) {
+ 		flags |= MTPmessages_SaveDraft::Flag::f_media;
+@@ -4680,8 +4680,7 @@ void ApiWrap::sendMessage(
  			sendFlags |= MTPmessages_SendMessage::Flag::f_reply_to;
  			mediaFlags |= MTPmessages_SendMedia::Flag::f_reply_to;
  		}
@@ -179,10 +179,10 @@ index 644bf21030..4b00ad73e7 100644
  		_draft.removed = false;
  	}
 -- 
-2.54.0
+2.55.0
 
 
-From e9dca0d5e82638aca653eb420d1c7c421e2fd039 Mon Sep 17 00:00:00 2001
+From 42fb5fc4c82a833f1aa15d17df805a1ed716a53d Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 23 May 2023 17:08:09 +0400
 Subject: [PATCH 06/18] Disable webpage previews on other users messages
@@ -192,10 +192,10 @@ Subject: [PATCH 06/18] Disable webpage previews on other users messages
  1 file changed, 2 insertions(+), 28 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index 221bde80b4..ec3bd1d791 100644
+index 5d48e5c060..c9b0b163fd 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -367,34 +367,8 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
+@@ -370,34 +370,8 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
  		}, [](const MTPDdocumentEmpty &) -> Result {
  			return nullptr;
  		});
@@ -233,10 +233,10 @@ index 221bde80b4..ec3bd1d791 100644
  		return media.vgame().match([&](const MTPDgame &game) {
  			return std::make_unique<Data::MediaGame>(
 -- 
-2.54.0
+2.55.0
 
 
-From 782c964914d5723a03347c5d6338348c22d20488 Mon Sep 17 00:00:00 2001
+From 5f4a59447c59b3864da7a0be6a35a99a6c1d7a6a Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 22 May 2023 17:11:53 +0400
 Subject: [PATCH 07/18] Disable context menu item N Reacted
@@ -247,10 +247,10 @@ Subject: [PATCH 07/18] Disable context menu item N Reacted
  2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index 5dee756551..6110b117c6 100644
+index 045c1d289a..efb7a01d24 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
-@@ -2733,8 +2733,7 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+@@ -2855,8 +2855,7 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
  		return item;
  	};
  	const auto leaderOrSelf = groupLeaderOrSelf(_dragStateItem);
@@ -261,10 +261,10 @@ index 5dee756551..6110b117c6 100644
  	const auto clickedReaction = ReactionIdOfLink(link);
  	const auto linkPhoneNumber = link
 diff --git a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
-index 7fb4cb8290..b512779b01 100644
+index 94fe16516d..7794a397ff 100644
 --- a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
-@@ -1417,8 +1417,7 @@ void FillContextMenuItems(
+@@ -1487,8 +1487,7 @@ void FillContextMenuItems(
  		: nullptr;
  	const auto hasSelection = !request.selectedItems.empty()
  		|| !request.selectedText.empty();
@@ -275,10 +275,10 @@ index 7fb4cb8290..b512779b01 100644
  	AddReplyToMessageAction(result, request, list);
  	if (item) {
 -- 
-2.54.0
+2.55.0
 
 
-From 62ca8e5cabb5c326593b387ca34e7d7d12f95123 Mon Sep 17 00:00:00 2001
+From ead9d2ea4d9171f8d3b4015590c05e67988054db Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:25:35 +0400
 Subject: [PATCH 08/18] Cannot pin messages; disabled PinnedBar
@@ -289,10 +289,10 @@ Subject: [PATCH 08/18] Cannot pin messages; disabled PinnedBar
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Telegram/SourceFiles/data/data_peer.cpp b/Telegram/SourceFiles/data/data_peer.cpp
-index ec10d0fdc8..b357c9e2e5 100644
+index 3f51177811..c4c81b84f8 100644
 --- a/Telegram/SourceFiles/data/data_peer.cpp
 +++ b/Telegram/SourceFiles/data/data_peer.cpp
-@@ -1769,7 +1769,7 @@ Data::RestrictionCheckResult PeerData::amRestricted(
+@@ -1771,7 +1771,7 @@ Data::RestrictionCheckResult PeerData::amRestricted(
  				: Result::Allowed())
  			: (right == ChatRestriction::PinMessages)
  			? ((user->flags() & UserDataFlag::CanPinMessages)
@@ -302,10 +302,10 @@ index ec10d0fdc8..b357c9e2e5 100644
  			: Result::Allowed();
  	} else if (const auto channel = asChannel()) {
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index a475c6bfcf..7ebc6ec3a6 100644
+index 2071a9d289..e9d1a21004 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -8442,7 +8442,7 @@ void HistoryWidget::checkPinnedBarState() {
+@@ -9225,7 +9225,7 @@ void HistoryWidget::checkPinnedBarState() {
  		}
  		return;
  	}
@@ -315,10 +315,10 @@ index a475c6bfcf..7ebc6ec3a6 100644
  	}
  
 -- 
-2.54.0
+2.55.0
 
 
-From 0e8a036ae2c83d47d307dda89ffef2bf7568265f Mon Sep 17 00:00:00 2001
+From febfefea1b1ee77aff4d59e27084409168dcc8e1 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 10:55:01 +0400
 Subject: [PATCH 09/18] Disable record button
@@ -329,17 +329,17 @@ Subject: [PATCH 09/18] Disable record button
  2 files changed, 2 insertions(+), 14 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index 7ebc6ec3a6..a8a4a376f6 100644
+index e9d1a21004..d4885028f9 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -5945,13 +5945,7 @@ bool HistoryWidget::isSearching() const {
+@@ -6511,13 +6511,7 @@ bool HistoryWidget::isSearching() const {
  }
  
  bool HistoryWidget::showRecordButton() const {
 -	return (_recordAvailability != Webrtc::RecordAvailability::None)
 -		&& !_voiceRecordBar->isListenState()
 -		&& !_voiceRecordBar->isRecordingByAnotherBar()
--		&& !HasSendText(_field)
+-		&& !hasSendableContent()
 -		&& !_previewDrawPreview
 -		&& (_replyTo || !readyToForward())
 -		&& !_editMsgId;
@@ -348,10 +348,10 @@ index 7ebc6ec3a6..a8a4a376f6 100644
  
  bool HistoryWidget::showInlineBotCancel() const {
 diff --git a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
-index d55c02e71e..c0d1d3ed5d 100644
+index 49587ec838..13d3686659 100644
 --- a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
 +++ b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
-@@ -2288,13 +2288,7 @@ void ComposeControls::orderControls() {
+@@ -2468,13 +2468,7 @@ void ComposeControls::orderControls() {
  }
  
  bool ComposeControls::showRecordButton() const {
@@ -359,7 +359,7 @@ index d55c02e71e..c0d1d3ed5d 100644
 -		&& (_recordAvailability != Webrtc::RecordAvailability::None)
 -		&& !_voiceRecordBar->isListenState()
 -		&& !_voiceRecordBar->isRecordingByAnotherBar()
--		&& !HasSendText(_field)
+-		&& !hasSendableContent()
 -		&& !readyToForward()
 -		&& !isEditingMessage();
 +	return false;
@@ -367,10 +367,10 @@ index d55c02e71e..c0d1d3ed5d 100644
  
  bool ComposeControls::showEditStarsButton() const {
 -- 
-2.54.0
+2.55.0
 
 
-From f675056413eb4d6865efc4a9906fed9b009a3fb7 Mon Sep 17 00:00:00 2001
+From cf989d7b0d94b368559252c589d0449698f4532e Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 24 May 2023 16:45:47 +0400
 Subject: [PATCH 10/18] Disable calls
@@ -380,10 +380,10 @@ Subject: [PATCH 10/18] Disable calls
  1 file changed, 3 insertions(+), 22 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp b/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
-index 70e8d5f757..fd592ab2e8 100644
+index 0e33de8a51..6f6289bce3 100644
 --- a/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_top_bar_widget.cpp
-@@ -1315,31 +1315,12 @@ void TopBarWidget::updateControlsVisibility() {
+@@ -1370,31 +1370,12 @@ void TopBarWidget::updateControlsVisibility() {
  		&& !isOneColumn
  		&& _controller->canShowThirdSection()
  		&& !_chooseForReportReason);
@@ -419,10 +419,10 @@ index 70e8d5f757..fd592ab2e8 100644
  		&& groupCallsEnabled
  		&& !_chooseForReportReason);
 -- 
-2.54.0
+2.55.0
 
 
-From 1cab525b0bff9efaf9c5542a291dcea26e752ade Mon Sep 17 00:00:00 2001
+From 3fc5af31ac2d7b7f99c67b71c70a6f1e0c3f4507 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 25 May 2023 14:38:14 +0400
 Subject: [PATCH 11/18] Disable MUTE/UNMUTE button
@@ -432,10 +432,10 @@ Subject: [PATCH 11/18] Disable MUTE/UNMUTE button
  1 file changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index a8a4a376f6..e8e30fcc56 100644
+index d4885028f9..fbe66bc37b 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -5933,11 +5933,7 @@ bool HistoryWidget::isChoosingTheme() const {
+@@ -6499,11 +6499,7 @@ bool HistoryWidget::isChoosingTheme() const {
  }
  
  bool HistoryWidget::isMuteUnmute() const {
@@ -449,10 +449,10 @@ index a8a4a376f6..e8e30fcc56 100644
  
  bool HistoryWidget::isSearching() const {
 -- 
-2.54.0
+2.55.0
 
 
-From 2d6cfa479a5b365fead37ca364cc666fb87eef95 Mon Sep 17 00:00:00 2001
+From 156c8a14a702b3de63d80581d421a05a46550587 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Thu, 28 Sep 2023 09:28:21 +0400
 Subject: [PATCH 12/18] Disable stories
@@ -465,10 +465,10 @@ Subject: [PATCH 12/18] Disable stories
  4 files changed, 2 insertions(+), 16 deletions(-)
 
 diff --git a/Telegram/SourceFiles/data/data_peer.cpp b/Telegram/SourceFiles/data/data_peer.cpp
-index b357c9e2e5..751c39fb07 100644
+index c4c81b84f8..2f603da13c 100644
 --- a/Telegram/SourceFiles/data/data_peer.cpp
 +++ b/Telegram/SourceFiles/data/data_peer.cpp
-@@ -2001,11 +2001,6 @@ const Data::WallPaper *PeerData::wallPaper() const {
+@@ -2006,11 +2006,6 @@ const Data::WallPaper *PeerData::wallPaper() const {
  }
  
  bool PeerData::hasActiveStories() const {
@@ -481,10 +481,10 @@ index b357c9e2e5..751c39fb07 100644
  }
  
 diff --git a/Telegram/SourceFiles/dialogs/dialogs_row.cpp b/Telegram/SourceFiles/dialogs/dialogs_row.cpp
-index 3b01b6e83f..6aaab721a3 100644
+index 12930c3c29..6893011a3b 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_row.cpp
 +++ b/Telegram/SourceFiles/dialogs/dialogs_row.cpp
-@@ -403,7 +403,7 @@ void Row::PaintCornerBadgeFrame(
+@@ -454,7 +454,7 @@ void Row::PaintCornerBadgeFrame(
  	q.translate(framePadding, framePadding);
  	auto hq = std::optional<PainterHighQualityEnabler>();
  	const auto photoSize = context.st->photoSize;
@@ -494,10 +494,10 @@ index 3b01b6e83f..6aaab721a3 100644
  		hq.emplace(q);
  		const auto line = st::dialogsStoriesFull.lineTwice / 2.;
 diff --git a/Telegram/SourceFiles/dialogs/dialogs_widget.cpp b/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
-index 2ff6367a44..c38de9f072 100644
+index 08a51854bd..838c9c315d 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
 +++ b/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
-@@ -367,12 +367,7 @@ Widget::Widget(
+@@ -421,12 +421,7 @@ Widget::Widget(
  	object_ptr<Ui::IconButton>(this, st::dialogsLock))
  , _scroll(this)
  , _scrollToTop(_scroll, st::dialogsToUp)
@@ -512,10 +512,10 @@ index 2ff6367a44..c38de9f072 100644
  , _peerSearch(&controller->session(), Api::PeerSearch::Type::WithSponsored)
  , _singleMessageSearch(&controller->session()) {
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_widget.cpp b/Telegram/SourceFiles/info/profile/info_profile_widget.cpp
-index 861415536b..0bbc971807 100644
+index c69eda404b..9b7db1be97 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_widget.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_widget.cpp
-@@ -207,10 +207,6 @@ rpl::producer<QString> Widget::title() {
+@@ -342,10 +342,6 @@ rpl::producer<QString> Widget::title() {
  }
  
  rpl::producer<Dialogs::Stories::Content> Widget::titleStories() {
@@ -527,10 +527,10 @@ index 861415536b..0bbc971807 100644
  }
  
 -- 
-2.54.0
+2.55.0
 
 
-From c3cea52aecef8b90a8c9824c3546aabc272b76de Mon Sep 17 00:00:00 2001
+From 0f250c74fdeb0aabaf42a9abe2cb1a626df26ebe Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 8 Nov 2023 17:22:20 +0400
 Subject: [PATCH 13/18] Remove ability to copy monospace text via click
@@ -540,10 +540,10 @@ Subject: [PATCH 13/18] Remove ability to copy monospace text via click
  1 file changed, 4 deletions(-)
 
 diff --git a/Telegram/SourceFiles/core/ui_integration.cpp b/Telegram/SourceFiles/core/ui_integration.cpp
-index 27d953deeb..f1945b1725 100644
+index 824626b934..6e2b2dc743 100644
 --- a/Telegram/SourceFiles/core/ui_integration.cpp
 +++ b/Telegram/SourceFiles/core/ui_integration.cpp
-@@ -379,10 +379,6 @@ std::shared_ptr<ClickHandler> UiIntegration::createLinkHandler(
+@@ -381,10 +381,6 @@ std::shared_ptr<ClickHandler> UiIntegration::createLinkHandler(
  		}
  	} break;
  
@@ -555,10 +555,10 @@ index 27d953deeb..f1945b1725 100644
  		return (my && my->session)
  			? std::make_shared<PhoneClickHandler>(my->session, data.text)
 -- 
-2.54.0
+2.55.0
 
 
-From da9c5b5e550518b78089d5a04c92c3f12369dd5d Mon Sep 17 00:00:00 2001
+From fc998fd058363a077601b9b5016ce3c0264c1692 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:23:06 +0400
 Subject: [PATCH 14/18] Disable background color on replies
@@ -568,7 +568,7 @@ Subject: [PATCH 14/18] Disable background color on replies
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Telegram/SourceFiles/ui/chat/chat_style.h b/Telegram/SourceFiles/ui/chat/chat_style.h
-index d205747698..34911be56a 100644
+index 84af336c38..ef21e56530 100644
 --- a/Telegram/SourceFiles/ui/chat/chat_style.h
 +++ b/Telegram/SourceFiles/ui/chat/chat_style.h
 @@ -43,7 +43,7 @@ inline constexpr auto kColorPatternsCount = Text::kMaxQuoteOutlines;
@@ -581,10 +581,10 @@ index d205747698..34911be56a 100644
  inline constexpr auto kDefaultOutline2Opacity = 0.3;
  inline constexpr auto kDefaultOutline3Opacity = 0.6;
 -- 
-2.54.0
+2.55.0
 
 
-From f908ea1b3ab3bd1010962c943fe79f9c761cd2d7 Mon Sep 17 00:00:00 2001
+From 4b455dce5a7df3792da02003ce19ab10a93a2e25 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Sun, 19 Nov 2023 12:56:39 +0400
 Subject: [PATCH 15/18] Disable background emoji on replies
@@ -609,10 +609,10 @@ index 6ddb53ad9d..76e53f9b5b 100644
  		? nullptr
  		: useColorCollectible
 -- 
-2.54.0
+2.55.0
 
 
-From 7011f395e736678983e4ffe3037f08e728ab854a Mon Sep 17 00:00:00 2001
+From 866e8869d31e607e8c7e7abf11c895e6966962e7 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Tue, 12 Dec 2023 14:28:34 +0400
 Subject: [PATCH 16/18] Allow copying text from restricted posts
@@ -624,10 +624,10 @@ Subject: [PATCH 16/18] Allow copying text from restricted posts
  3 files changed, 7 insertions(+), 36 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index 6110b117c6..5646d8b27f 100644
+index efb7a01d24..8bf7fc7c4d 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
-@@ -3712,12 +3712,12 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+@@ -3884,12 +3884,12 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
  }
  
  bool HistoryInner::hasCopyRestriction(HistoryItem *item) const {
@@ -643,10 +643,10 @@ index 6110b117c6..5646d8b27f 100644
  
  bool HistoryInner::showCopyRestriction(HistoryItem *item) {
 diff --git a/Telegram/SourceFiles/history/view/history_view_list_widget.cpp b/Telegram/SourceFiles/history/view/history_view_list_widget.cpp
-index 5cb8b710f5..596ee7c005 100644
+index e1d9fdf26d..14506f78da 100644
 --- a/Telegram/SourceFiles/history/view/history_view_list_widget.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_list_widget.cpp
-@@ -1698,39 +1698,19 @@ bool ListWidget::isEmpty() const {
+@@ -1773,39 +1773,19 @@ bool ListWidget::isEmpty() const {
  }
  
  bool ListWidget::hasCopyRestriction(HistoryItem *item) const {
@@ -691,10 +691,10 @@ index 5cb8b710f5..596ee7c005 100644
  
  bool ListWidget::hasCopyRestrictionForSelected() const {
 diff --git a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
-index fb490ddecd..06e976203d 100644
+index 81ba091204..2834e84a85 100644
 --- a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
 +++ b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
-@@ -1255,16 +1255,7 @@ QSize OverlayWidget::flipSizeByRotation(QSize size) const {
+@@ -1303,16 +1303,7 @@ QSize OverlayWidget::flipSizeByRotation(QSize size) const {
  }
  
  bool OverlayWidget::hasCopyMediaRestriction(bool skipPremiumCheck) const {
@@ -713,10 +713,10 @@ index fb490ddecd..06e976203d 100644
  
  bool OverlayWidget::showCopyMediaRestriction(bool skipPRemiumCheck) {
 -- 
-2.54.0
+2.55.0
 
 
-From 6b333b57ab8d94e560618950dbe4e279d9ef67f1 Mon Sep 17 00:00:00 2001
+From 884f9cd53dd42971d38ec67beeeaa7483935d65d Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Wed, 4 Jun 2025 10:13:25 +0400
 Subject: [PATCH 17/18] Remove top bar suggestions with premium ads and
@@ -727,10 +727,10 @@ Subject: [PATCH 17/18] Remove top bar suggestions with premium ads and
  1 file changed, 4 deletions(-)
 
 diff --git a/Telegram/SourceFiles/dialogs/dialogs_widget.cpp b/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
-index c38de9f072..31b62afffd 100644
+index 838c9c315d..ff4cc3257c 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
 +++ b/Telegram/SourceFiles/dialogs/dialogs_widget.cpp
-@@ -718,10 +718,6 @@ Widget::Widget(
+@@ -799,10 +799,6 @@ Widget::Widget(
  	}
  
  	setupFrozenAccountBar();
@@ -742,10 +742,10 @@ index c38de9f072..31b62afffd 100644
  
  void Widget::setupSwipeBack() {
 -- 
-2.54.0
+2.55.0
 
 
-From 9f091d3cc73663ca2606f5f2e995b71dc14a302a Mon Sep 17 00:00:00 2001
+From 3dadd3788dce12554cebc634d595b05bee8d6076 Mon Sep 17 00:00:00 2001
 From: vehlwn <36479428+vehlwn@users.noreply.github.com>
 Date: Mon, 6 Apr 2026 17:45:35 +0400
 Subject: [PATCH 18/18] Remove ai button on message input and image caption
@@ -756,10 +756,10 @@ Subject: [PATCH 18/18] Remove ai button on message input and image caption
  2 files changed, 1 insertion(+), 27 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index e8e30fcc56..0271ff1ba8 100644
+index fbe66bc37b..2d466ad190 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -6417,9 +6417,7 @@ bool HistoryWidget::fieldOrDisabledShown() const {
+@@ -7010,9 +7010,7 @@ bool HistoryWidget::hideExtraButtons() const {
  }
  
  bool HistoryWidget::hasEnoughLinesForAi() const {
@@ -769,9 +769,9 @@ index e8e30fcc56..0271ff1ba8 100644
 +    return false;
  }
  
- bool HistoryWidget::textExceedsMaxSize() const {
+ bool HistoryWidget::hasEnoughLinesForExpand() const {
 diff --git a/Telegram/SourceFiles/ui/controls/compose_ai_button_factory.cpp b/Telegram/SourceFiles/ui/controls/compose_ai_button_factory.cpp
-index 6cea602d92..792050a212 100644
+index a4051002f0..55333781e1 100644
 --- a/Telegram/SourceFiles/ui/controls/compose_ai_button_factory.cpp
 +++ b/Telegram/SourceFiles/ui/controls/compose_ai_button_factory.cpp
 @@ -36,30 +36,6 @@ base::options::toggle HideAiButtonOption({
@@ -806,5 +806,5 @@ index 6cea602d92..792050a212 100644
  }
  
 -- 
-2.54.0
+2.55.0
 
